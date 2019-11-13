@@ -1,0 +1,38 @@
+#footer {
+    height: 200px;
+    width: 100%;
+    bottom: 0;
+    position: relative;
+    background-color: #708090;
+}
+
+#footercopy{
+    top:15px;
+    color:  #C0C0C0;
+    font: bold 18px 'lucida sans', 'trebuchet MS', 'Tahoma';
+}
+
+#footertitle{
+    top:15px;
+    color:  #C0C0C0;
+    font: bold 18px 'lucida sans', 'trebuchet MS', 'Tahoma';
+}
+
+#footertext{
+    top:30px;
+    color:  #C0C0C0;
+    font:  15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: 3px;
+    line-height: 25px;
+}
+
+
+#footertext .a:active {
+    color: #ffffff;
+}
+
+#footertext .a:hover {
+    color: #ffffff;
+}
+
+

@@ -1,0 +1,134 @@
+#headersmall {
+    background-color: #708090;
+    text-align: center;
+    height: 55px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+}
+
+#logo {
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+#logo img {
+    position: relative;
+    height: 50px;
+    vertical-align: middle;
+}
+
+#tab3 {
+    text-size-adjust: auto;
+}
+
+ul li a {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20;
+}
+
+/*
+    font: bold 20px 'lucida sans', 'trebuchet MS', 'Tahoma';
+   }
+   */
+
+#tab3 .nav-link {
+    color: #ffffff;
+}
+
+#tab3 .nav-link :active {
+    color: #C0C0C0;
+}
+
+#tab3 .nav-link:hover {
+    color: #C0C0C0;
+}
+
+#searchbox .form {
+    position: relative;
+    width: 454px;
+    height: 42px;
+    background:  #2F4F4F;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.input {
+    width: 350px;
+    height: 42px;
+    background-color: #eeeeee;
+
+    border-radius: 0 5px 5px 0;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    font-style: italic;
+}
+
+.input:hover{
+    border: 1px;
+    border-color: #2F4F4F;
+}
+
+.input:active{
+    border: 1px;
+    border-color: #2F4F4F;
+}
+
+
+
+
+.input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+  }
+
+#go {
+    widows: 45px;
+    height: 38px;
+    background-color: #eeeeee;
+    border: 1px;
+    border-radius: 5px 5px 5px 5px;
+    border-color: #2F4F4F;
+    position: relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;;
+
+}
+
+#go:active{
+    border: 5px;
+    border-color: #2F4F4F;
+}
+
+#searchbox {
+    display: table;
+}
+
+#searchbox .form-inline .input {
+    margin: auto;
+    border-top: 5em;
+}
+
+.input .button {
+    top: 5;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#user {
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+#user img {
+    position: relative;
+    height: 50px;
+    vertical-align: middle;
+}

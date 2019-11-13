@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Profiler } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NotFound from "./NotFound";
-import Signup from "./component/signup/Signup";
+import SignUp from "./component/signup/Signup";
 import Home from "./component/home/Home";
+import Discover from "./component/discover/Discover";
+import Profile from "./component/profile/Profile";
+import Booking from "./component/booking/Booking";
+import BookingForm from "./component/booking/BookingForm";
+import BookingForm2 from "./component/booking/BookingForm2";
 import ServiceDetail from "./component/servicedetail/ServiceDetail";
 import Example from "./component/Example_for_sidebar/Example";
-import Profile from "./component/profile/Profile";
 
 
 ////  ONLY TO TEST THE SERVICE DETAIL PAGE  ////
@@ -30,18 +34,6 @@ const serviceProvider = {
         "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores"
     ]
 }
-
-// MOCK DATA //
-const mockuser = {
-    firstName: 'Jack',
-    lastName: 'Daniels',
-    email: 'jd123@gmail.com',
-    phone: '416-234-1234',
-    street: '123 Fake Street',
-    city: 'Springfield',
-    province: 'ON',
-    postal: 'L1H 2H4'
-}
 //................................................////
 
 
@@ -55,33 +47,54 @@ class App extends Component {
 
                     <Route exact path='/' render={() => (
                         <Home />
-                    )}/>
+                    )} />
+
+                    <Route exact path='/Home' render={() => (
+                        <Home />
+                    )} />
 
                     <Route exact path='/signup' render={() => (
-                        <Signup />
-                    )}/>
+                        <SignUp />
+                    )} />
 
-                    <Route exact path='/profile' render={() => (
-                        <Profile user= { mockuser }/>
-                    )}/>
-                    
+                    <Route exact path='/Discover' render={() => (
+                        <Discover />
+                    )} />
+
+                    <Route exact path='/Booking' render={() => (
+                        <Booking />
+                    )} />
+
+                    <Route exact path='/BookingForm' render={() => (
+                        <BookingForm />
+                    )} />
+
+                    <Route exact path='/BookingForm2' render={() => (
+                        <BookingForm2 />
+                    )} />
+
+                    <Route exact path='/Profile' render={() => (
+                        <Profile />
+                    )} />
+
+
                     {/*temporary*/
                     /*until we implement a link to access to servicedetail, I use plumbing link to access it */}
                     <Route exact path='/plumbing' render={() => (
-                        <ServiceDetail serviceProvider={ serviceProvider }/>
-                    )}/>
+                        <ServiceDetail serviceProvider={serviceProvider} />
+                    )} />
 
                     <Route exact path='/housekeeping' render={() => (
-                        <Example/>
-                    )}/>
+                        <Example />
+                    )} />
 
                     <Route render={() => (
-                        <NotFound/>
-                    )}/>
+                        <NotFound />
+                    )} />
 
                 </Switch>
 
-             </BrowserRouter>
+            </BrowserRouter>
         );
     }
 
