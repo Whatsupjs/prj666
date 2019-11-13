@@ -1,16 +1,25 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const AddressSchema = require('./addressModel.js');
 const Schema = mongoose.Schema;
+let ObjectId = mongoose.Types.ObjectId;
 
 const UserSchema = new Schema({
+    id: ObjectId,
+    userName: {
+        type: String,
+        unique: true,
+        trim: true,
+        required: "Username is Required",
+    },
     password: {
         type: String,
         trim: true,
         required: "Password is Required",
         validate: [
-          function(input) {
-            return input.length >= 6;
-          },
-          "Password should be longer."
+            function(input) {
+                return input.length >= 6;
+            },
+            "Password should be longer."
         ]
     },
     firstName: {
@@ -26,35 +35,10 @@ const UserSchema = new Schema({
         unique: true,
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
-    phone: {
-        type: String,
-        required: true
-    },
-    address: { 
-        streetNumber: { 
-        type : Number
-        },
-        streetName: { 
-            type: String
-        },
-        city: { 
-            type: String
-        },
-        province: { 
-            type: String 
-        },
-        postal: { 
-            type: String
-        } 
-    },
-    phone: {
-        type: String
-    }
-})
+    phone: String,
+    address: AddressSchema,
+    providerOf: [{ type: ObjectId, ref: 'Service' }],
+    userOf: [{ type: ObjectId, ref: 'Service' }]
+});
 
-
-UserSchema.virtual('userId').get(function() { return this._id; });
-
-// const User = mongoose.model('user', UserSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

@@ -1,55 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const AddressSchema = require('./addressModel.js');
 const Schema = mongoose.Schema;
+let ObjectId = mongoose.Types.ObjectId;
 
 const ServiceSchema = new Schema({
-    serviceName: {
-        type: String,
-        trim: true,
-        required: "Service name is Required"
-    },
-    serviceDesc:{
-        type: String
-    },
-    userId: {
-        type: Schema.Types.ObjectId,
-        ref: 'user'
-    },
-    address: {
-        streetNumber: {
-            type: Number
-        },
-        streetName: {
-            type: String
-        },
-        city: {
-            type: String
-        },
-        province: {
-            type: String
-        },
-        country: {
-            type: String
-        },
-        postal: {
-            type: String
-        }
-    },
-    serviceType: {
-        type: String
-    },/*
-    booking: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'booking'
-    }],
-    review: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'review'
-    }],*/
-    price: [{
-        type: Number
-    }]
-})
+    id: ObjectId,
+    type: String,
+    provider: { type: ObjectId, ref: "User" },
+    price: Number,
+    location: AddressSchema,
+    introduction: String,
+    detail: String,
+    rate: { type: Number, min: 0, max: 5 },
+    image: String,
+    availability: [{ date: Date, booked: Boolean, by: { type: ObjectId, ref: "User" } }],
+    comments: [{ type: String, author: { type: ObjectId, ref: "User" }, date: Date }]
+});
 
-// const Service = mongoose.model('service', ServiceSchema);
-
-module.exports = Service;
+module.exports = mongoose.model('Service', ServiceSchema);
