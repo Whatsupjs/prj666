@@ -79,7 +79,7 @@ class Signup extends Component {
 
     render() {
         if (this.state.toProfile === true) {
-            return <Redirect to='/profile' />
+            return <Redirect to='/user/profile' />
         }
 
         return (

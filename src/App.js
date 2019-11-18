@@ -6,6 +6,8 @@ import Home from "./component/home/Home";
 import ServiceDetail from "./component/servicedetail/ServiceDetail";
 import Example from "./component/Example_for_sidebar/Example";
 import Profile from "./component/profile/Profile";
+import UserService from './component/profile/UserService';
+import UserBooking from './component/profile/UserBooking';
 
 
 ////  ONLY TO TEST THE SERVICE DETAIL PAGE  ////
@@ -61,10 +63,18 @@ class App extends Component {
                         <Signup />
                     )}/>
 
-                    <Route exact path='/profile' render={() => (
+                    <Route exact path='/user/profile' render={() => (
                         <Profile user= { mockuser }/>
                     )}/>
                     
+                    <Route exact path='/user/service' render={() => (
+                        <UserService />
+                    )}/>
+
+                    <Route exact path='/user/booking' render={() => (
+                        <UserBooking />
+                    )}/>
+
                     {/*temporary*/
                     /*until we implement a link to access to servicedetail, I use plumbing link to access it */}
                     <Route exact path='/plumbing' render={() => (
