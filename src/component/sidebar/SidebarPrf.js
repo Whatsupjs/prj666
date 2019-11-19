@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 
 class SidebarPrf extends Component {
     render() {
-        //console.log(this.props.highlight);
         return(
-            <div id="prf" className="col-sm-2 sidebar">
+            <div id="prf" className="sidebar">
             <br/>
                 <div className="Profile">
                     <ul className="nav-sidebar">

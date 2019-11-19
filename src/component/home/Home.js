@@ -14,7 +14,7 @@ class Home extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer highlight="Home" hasSidebar={false}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-6">

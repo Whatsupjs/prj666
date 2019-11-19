@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class ServiceItem extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            service: props.service
+        }
+    }
     render() {
         return (
             <div>
@@ -24,7 +30,7 @@ class ServiceItem extends Component {
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         );
     }

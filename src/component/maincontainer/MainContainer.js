@@ -41,19 +41,19 @@ class MainContainer extends Component {
                             <div className="col-sm-12">
                                 <ul className="nav justify-content-center">
                                     <li className="nav-item">
-                                        <a className={(this.props.highlight === "Home" ? 'nav-link active' : 'nav-link')} href="/">Home</a>
+                                        <a className={(this.state.highlight === "Home" ? 'nav-link active' : 'nav-link')} href="/">Home</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className={(this.props.highlight === "House Keeping" ? 'nav-link active' : 'nav-link')} href="/housekeeping">House Keeping</a>
+                                        <a className={(this.state.highlight === "House Keeping" ? 'nav-link active' : 'nav-link')} href="/housekeeping">House Keeping</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className={(this.props.highlight === "Plumbing" ? 'nav-link active' : 'nav-link')} href="/plumbing">Plumbing</a>
+                                        <a className={(this.state.highlight === "Plumbing" ? 'nav-link active' : 'nav-link')} href="/plumbing">Plumbing</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className={(this.props.highlight === "Cooking" ? 'nav-link active' : 'nav-link')} href="/">Cooking</a>
+                                        <a className={(this.state.highlight === "Cooking" ? 'nav-link active' : 'nav-link')} href="/">Cooking</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className={(this.props.highlight === "Other" ? 'nav-link active' : 'nav-link')} href="/">Other</a>
+                                        <a className={(this.state.highlight === "Other" ? 'nav-link active' : 'nav-link')} href="/">Other</a>
                                     </li>
                                 </ul>
                             </div>
@@ -62,11 +62,10 @@ class MainContainer extends Component {
                     </div>
 
                     <div className="row">
-                        {/* <div className={(this.props.hasSidebar ? "visible" : "invisible")}> <Sidebar/> </div>
-                        <div className={(this.props.hasSidebar_prf ? "visible" : "invisible")}> <Sidebar_prf/> </div>
-                        <div className={(this.props.hasSidebar ? " col-sm-offset-1 col-sm-7 main" : " col-sm-12 main")}> */}
+                        { this.state.hasSidebar && <div className="col-md-3"> <Sidebar/> </div> }
+                        <div className={(this.state.hasSidebar ? " col-md-offset-2 col-md-7 main" : " col-sm-12 main")}>
                             {this.props.children}
-                        {/* </div> */}
+                        </div>
                     </div>
 
                 <Footer/>

@@ -39,7 +39,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer highlight="House Keeping" hasSidebar={true}>
 
                 <SidebarPrf />
                 <div className="user_profile">
