@@ -38,7 +38,7 @@ class ServiceDetail extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
 
                     <div className="container-fluid">

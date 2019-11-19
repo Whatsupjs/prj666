@@ -55,15 +55,16 @@ body {
 }
 
 /* added base css for footer. Oct 23, 2019 - Jun*/
-div.footer, div.col-sm-6 div.newline{
+.footer{
   /*temporary colour*/
   background-color: rgb(243, 117, 117);
-  position: sticky;
-  white-space: pre-line;
-  text-align: right;
-  bottom: 0;
+  padding: 10px;
 }
 
+.newline{
+  white-space: pre-line;
+  text-align: right;
+}
 
 /*
  * Sidebar
@@ -116,14 +117,14 @@ ul.nav-sidebar {
 div.signup{
   position: relative;
   width: 100%;
-} 
-.signupform { 
+}
+.signupform {
   text-align: left;
   position: relative;
   left: 25%;
 }
 
-          
+
 /* Profile page css */
 div#prf {
   display: inline-block;
@@ -135,7 +136,7 @@ div.user_profile {
   display: inline-block;
   width: 75%;
   margin: 0 25px;
-  text-align: left; 
+  text-align: left;
 }
 
 .userInfo{
