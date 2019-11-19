@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 
 const boxStyle = {
     margin: '2em',

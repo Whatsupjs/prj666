@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Footer from './component/footer/Footer';
-import Sidebar from './component/sidebar/Sidebar';
-// import SidebarPrf from './component/sidebar/SidebarPrf';
+import Footer from '../footer/Footer';
+import Sidebar from '../sidebar/Sidebar';
+// import SidebarPrf from '../sidebar/SidebarPrf';
 
 class MainContainer extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class MainContainer extends Component {
             hasSidebar: props.hasSidebar
         }
     }
-    
+
     render() {
         return (
             // <div>

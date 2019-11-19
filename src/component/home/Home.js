@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 
 class Home extends Component {
 
@@ -26,15 +26,15 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-6">
-                            <h3>Already Have An Account?</h3> 
+                            <h3>Already Have An Account?</h3>
                             <h3>Login Now!</h3>
                         </div>
                         <div className="col-sm-6">
-                            <h3>Don't Have An Account Yet?</h3> 
+                            <h3>Don't Have An Account Yet?</h3>
                             <h3>Sign Up With Us Today!</h3>
                         </div>
                     </div>
@@ -45,4 +45,4 @@ class Home extends Component {
 }
 
 
-export default Home; 
+export default Home;
