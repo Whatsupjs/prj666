@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 import Sidebar from "../sidebar/Sidebar";
 
 
-class Example extends Component {
+class HouseKeeping extends Component {
     render() {
         return (
             <MainContainer highlight="House Keeping" hasSidebar={true}>    {/* we click on "House Keeping" to get to this page */}
@@ -16,4 +16,4 @@ class Example extends Component {
     }
 }
 
-export default Example;
+export default HouseKeeping;

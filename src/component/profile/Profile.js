@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 import SidebarPrf from '../sidebar/SidebarPrf';
 
 
@@ -18,7 +18,7 @@ class Profile extends Component {
         console.log('component mounted');
     }
 
-    // update state variable whenever user inputs. 
+    // update state variable whenever user inputs.
     onChange = (e) => {
         this.handleUserInput(e);
     }
@@ -31,8 +31,8 @@ class Profile extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission. 
-        console.log(this.state); // just checking values; remove once done. 
+        e.preventDefault();   //prevents actual submission.
+        console.log(this.state); // just checking values; remove once done.
         /* later on implement database entry */
         //figure out how to update to database
     }
@@ -126,4 +126,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile; 
+export default Profile;

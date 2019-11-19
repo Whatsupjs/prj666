@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NotFound from "./NotFound";
+import NotFound from "./component/notfound/NotFound";
 import Signup from "./component/signup/Signup";
 import Home from "./component/home/Home";
 import ServiceDetail from "./component/servicedetail/ServiceDetail";
-import Example from "./component/Example_for_sidebar/Example";
+import HouseKeeping from "./component/housekeeping/HouseKeeping";
 import Profile from "./component/profile/Profile";
 
 
@@ -64,7 +64,7 @@ class App extends Component {
                     <Route exact path='/profile' render={() => (
                         <Profile user= { mockuser }/>
                     )}/>
-                    
+
                     {/*temporary*/
                     /*until we implement a link to access to servicedetail, I use plumbing link to access it */}
                     <Route exact path='/plumbing' render={() => (
@@ -72,7 +72,7 @@ class App extends Component {
                     )}/>
 
                     <Route exact path='/housekeeping' render={() => (
-                        <Example/>
+                        <HouseKeeping/>
                     )}/>
 
                     <Route render={() => (
