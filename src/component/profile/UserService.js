@@ -14,9 +14,13 @@ class UserService extends Component {
 
     componentDidMount() {
         //fetch from db -> json etc..
+        // this.fetchData();
         console.log('component mounted');
     }
 
+    fetchData(){
+        /* ajax call; figure out without using api. or maybe use API instead? */
+    }
     // update state variable whenever user inputs. 
     onChange = (e) => {
         this.handleUserInput(e);
@@ -49,15 +53,25 @@ class UserService extends Component {
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Name</td>
+                                <td>Service Name</td>
+                                <td>Address</td>
                                 <td>Type</td>
                                 <td># Bookings</td>
                                 <td>Creation Date</td>
                             </tr>
                         </thead>
                         <tbody>
+                            {/* 
+                                some form of get/ fetch function to populate service state => {
 
+                                    return(
+                                        <tr>
+                                            <td key={index}>{service.name}</td>
+                                            <td key={index}>{service.type}</td>
+                                        </tr>
+                                    )
+                                }
+                            */}
                         </tbody>
                     </table>
 

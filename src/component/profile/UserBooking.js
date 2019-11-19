@@ -49,15 +49,25 @@ class UserBooking extends Component {
                     <table className="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <td>ID</td>
                                 <td>Service Name</td>
+                                <td>Address</td>
                                 <td>Type</td>
                                 <td>Contact</td>
                                 <td>Booked Date</td>
                             </tr>
                         </thead>
                         <tbody>
+                            {/* 
+                                some form of get/ fetch function to populate service state => {
 
+                                    return(
+                                        <tr>
+                                            <td key={index}>{service.name}</td>
+                                            <td key={index}>{service.type}</td>
+                                        </tr>
+                                    )
+                                }
+                            */}
                         </tbody>
                     </table>
 
