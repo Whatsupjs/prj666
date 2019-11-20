@@ -41,7 +41,7 @@ class Profile extends Component {
         return (
             <MainContainer highlight="House Keeping" hasSidebar={true}>
 
-                <SidebarPrf />
+                <SidebarPrf highlight="profile" />
                 <div className="user_profile">
                     <br />
                     <h2>User Profile</h2>
