@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 import SidebarPrf from '../sidebar/SidebarPrf';
 
 
@@ -21,7 +21,7 @@ class UserService extends Component {
     fetchData(){
         /* ajax call; figure out without using api. or maybe use API instead? */
     }
-    // update state variable whenever user inputs. 
+    // update state variable whenever user inputs.
     onChange = (e) => {
         this.handleUserInput(e);
     }
@@ -34,8 +34,8 @@ class UserService extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission. 
-        console.log(this.state); // just checking values; remove once done. 
+        e.preventDefault();   //prevents actual submission.
+        console.log(this.state); // just checking values; remove once done.
         /* later on implement database entry */
         //figure out how to update to database
     }
@@ -61,7 +61,7 @@ class UserService extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* 
+                            {/*
                                 some form of get/ fetch function to populate service state => {
 
                                     return(
@@ -84,4 +84,4 @@ class UserService extends Component {
     }
 }
 
-export default UserService; 
+export default UserService;

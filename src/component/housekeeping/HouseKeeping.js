@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
+import Sidebar from '../sidebar/Sidebar';
 import ServiceItem from "../serviceItem/ServiceItem";
 
 class HouseKeeping extends Component {
@@ -25,7 +26,8 @@ class HouseKeeping extends Component {
 
     render() {
         return (
-            <MainContainer highlight="House Keeping" hasSidebar={true}>
+            <MainContainer highlight="House Keeping">
+                <Sidebar/>
                 {
                     this.state.services.map((element, index) => {
                         return (

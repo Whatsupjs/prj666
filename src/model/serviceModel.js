@@ -6,6 +6,7 @@ let ObjectId = mongoose.Types.ObjectId;
 const ServiceSchema = new Schema({
     id: ObjectId,
     type: String,
+    name: String,
     provider: { type: ObjectId, ref: "User" },
     price: Number,
     location: AddressSchema,

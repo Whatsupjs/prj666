@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 import SidebarPrf from '../sidebar/SidebarPrf';
 
 
@@ -17,7 +17,7 @@ class UserBooking extends Component {
         console.log('component mounted');
     }
 
-    // update state variable whenever user inputs. 
+    // update state variable whenever user inputs.
     onChange = (e) => {
         this.handleUserInput(e);
     }
@@ -30,8 +30,8 @@ class UserBooking extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission. 
-        console.log(this.state); // just checking values; remove once done. 
+        e.preventDefault();   //prevents actual submission.
+        console.log(this.state); // just checking values; remove once done.
         /* later on implement database entry */
         //figure out how to update to database
     }
@@ -57,7 +57,7 @@ class UserBooking extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* 
+                            {/*
                                 some form of get/ fetch function to populate service state => {
 
                                     return(
@@ -80,4 +80,4 @@ class UserBooking extends Component {
     }
 }
 
-export default UserBooking; 
+export default UserBooking;

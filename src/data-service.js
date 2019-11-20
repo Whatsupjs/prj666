@@ -54,6 +54,7 @@ const UserSchema = new Schema({
 const ServiceSchema = new Schema({
     id: ObjectId,
     type: String,
+    name: String,
     provider: { type: ObjectId, ref: "User" },
     price: Number,
     location: AddressSchema,

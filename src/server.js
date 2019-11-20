@@ -50,6 +50,7 @@ const user = {
 
 const service = {
     type: "House Keeping",
+    name: "Aunt Mary's",
     provider: undefined,
     price: 99.99,
     location: address2,
