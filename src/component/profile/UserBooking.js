@@ -53,7 +53,7 @@ class UserBooking extends Component {
                                 <td>Address</td>
                                 <td>Type</td>
                                 <td>Contact</td>
-                                <td>Booked Date</td>
+                                <td>Booked Time Slot</td>
                             </tr>
                         </thead>
                         <tbody>

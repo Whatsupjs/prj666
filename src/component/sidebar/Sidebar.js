@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 class Sidebar extends Component {
     render() {
-        //console.log(this.props.highlight);
         return(
-            <div className="col-sm-3 col-md-2 sidebar">
+            <div className="sidebar">
                 <div className="serviceRating">
                     <h6>Service Rating</h6>
                     <ul className="nav-sidebar">

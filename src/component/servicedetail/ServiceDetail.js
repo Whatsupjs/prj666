@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContainer from '../../MainContainer';
+import MainContainer from '../maincontainer/MainContainer';
 
 const boxStyle = {
     margin: '2em',
@@ -38,7 +38,7 @@ class ServiceDetail extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
 
                     <div className="container-fluid">

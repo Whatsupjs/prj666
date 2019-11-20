@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 class SidebarPrf extends Component {
     render() {
-        //console.log(this.props.highlight);
         return (
             <div id="prf" className="col-sm-2 sidebar">
                 <br />
