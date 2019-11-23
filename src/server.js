@@ -1,18 +1,27 @@
+require('../config');
 const express = require("express");
 const bodyParser = require("body-parser");
 const data_service = require("./data-service.js");
 
-const app = express();
-const router = express.Router();
+const mongoose = require('mongoose');
+let ObjectId = mongoose.Types.ObjectId;
 
-const API_PORT = process.env.PORT || 8080;
+const app = express();
+
+const API_PORT = process.env.API_PORT || 3001;
+const API = process.env.API || "http://localhost";
 
 function onHttpStart() {
     console.log("Express http server listening on: " + API_PORT);
 }
 
-app.use(express.static('public'));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    next();
+});
 
+app.use(express.static("public", {index: false}));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}, {useNewUrlParser: true }));
 
 
@@ -23,36 +32,36 @@ app.use(bodyParser.urlencoded({extended: true}, {useNewUrlParser: true }));
 //---- but to test, I am making those objects here
 
 const address1 = {
-    streetNumber: "36",
-    streetName: "Angel's St.",
-    city: "Totonto",
+    streetNumber: "22",
+    streetName: "Honest's Avenue",
+    city: "Toronto",
     province: "Ontario",
-    postal: "M4M 4M4"
+    postal: "L2L 4P4"
 };
 
 const address2 = {
-    streetNumber: "40",
-    streetName: "Guest St.",
-    city: "Totonto",
+    streetNumber: "29",
+    streetName: "Winter St.",
+    city: "Toronto",
     province: "Ontario",
-    postal: "N2N 2N2"
+    postal: "N2M 2P3"
 };
 
 const user = {
-    userName: "KeithUserName",
-    password: "KeithPassword",
-    firstName: "Keith",
-    lastName: "Chen",
-    phone: "647-123-1234",
-    email: "karla123@gmail.com",
+    userName: "sunny",
+    password: "sydny332",
+    firstName: "Hummer",
+    lastName: "Simpson",
+    phone: "647-345-7878",
+    email: "salutation@gmail.com",
     address: address1
 };
 
 const service = {
     type: "House Keeping",
-    name: "Aunt Mary's",
+    name: "Wash it Up!",
     provider: undefined,
-    price: 99.99,
+    price: 55.55,
     location: address2,
     introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     detail: "Some detail",
@@ -62,8 +71,12 @@ const service = {
 
 //--------------- End of the creating fake objects  ---------------//
 
+app.get('/', function(req,res){
+    res.set('Content-Type', 'text/plain');
+    res.send({greeting: "hello quick!"});
+});
 
-router.post('/addService', (req, res) => {
+app.post('/addService', (req, res) => {
     data_service.makeService(req.body)        //needs to pass service in req.body in real use case
         .then((message) => {
             res.json(message);
@@ -73,7 +86,7 @@ router.post('/addService', (req, res) => {
         });
 });
 
-router.post('/addUser', (req, res) => {
+app.post('/addUser', (req, res) => {
     data_service.makeUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);
@@ -83,15 +96,24 @@ router.post('/addUser', (req, res) => {
         });
 });
 
-router.get('/services', (req, res) => {
-    data_service.getAllServices()
-        .then((services) => {
-            res.json(services);
-        })
-        .catch((err) => {
-            res.json(err);
-        });
+app.get('/services', async function(req, res) {
+    let services;
+    try {
+        if (req.query.type) {
+            services = await data_service.getServiceByType(req.query.type);
+        } else if (req.query.id) {
+            services = data_service.getServiceById(req.query.id);
+        } else {
+            services = await data_service.getAllServices();
+        }
+
+        res.json(services);
+    }
+    catch(err) {
+        res.json(err);
+    }
 });
+
 
 
 
@@ -107,18 +129,20 @@ data_service.initialize()
         console.log(message);
 
         //---------- Testing database ---------------//
+        //create user
         data_service.makeUser(user)
-            .then( (message) => {
-                console.log(message);
-                data_service.getUserByEmail(user.email)
-                    .then( (user_) => {
-                        console.log(user_);
-                        service.provider = user_._id;
-                        data_service.makeService(service)
-                            .then((message) => console.log(message));
-                    }).catch(err => console.log(err) );
+            .then( (user_) => {
+                    console.log(user_);
+                    service.provider = ObjectId(user_._id);
+                    data_service.makeService(service)
+                        .then((service_) => {
+                            console.log(service_);
+                            user_.providerOf.push(ObjectId(service_._id));
+                            user_.save();
+                        });
             }).catch(err => console.log(err) );
         //---------- End of the database test -------//
+
     }).catch(err => console.log(err) );
 
 
