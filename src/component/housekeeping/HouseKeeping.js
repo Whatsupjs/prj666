@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
-import Sidebar from '../sidebar/Sidebar';
 import ServiceItem from "../serviceItem/ServiceItem";
 
 class HouseKeeping extends Component {
@@ -11,34 +10,36 @@ class HouseKeeping extends Component {
        }
     }
 
-    componentDidMount() {
-        fetch('http://localhost:8080/services?type=housekeeping')
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    services: data
-                });
-            })
-            .catch(error => {
-                console.log("ERROR: " + error);
-            });
+    async componentWillMount() {
+        try {
+            const response = await fetch("http://localhost:3001/services?type=House%20Keeping", {method: 'GET'});
+            const data = await response.json();
+            console.log(data);
+            this.setState({ services: data });
+        }
+        catch(error) {
+            console.log("ERROR: " + error);
+        }
     }
 
     render() {
         return (
-            <MainContainer highlight="House Keeping">
-                <Sidebar/>
+            <MainContainer highlight="House Keeping" hasSidebar={true}>
+                <div className="row container-fluid">
                 {
                     this.state.services.map((element, index) => {
                         return (
-                            <div key={index} className="col-md-4 col-md-offset-1">
+
+                            <div key={index} className="col-md-8 col-md-offset-1">
                                 <ServiceItem service={element}/>
                             </div>
+
                         );
                     })
                 }
+                </div>
             </MainContainer>
-        );
+        )
     }
 }
 

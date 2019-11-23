@@ -9,4 +9,4 @@ module.exports.initialize = async function() {
     let db = mongoose.connection;
     db.once('open', () => { return "Connected to MongoDB successfully."; });
     db.on('error', (err) => { return "MongoDB connection error: " + err; });
-}
+};

@@ -72,9 +72,6 @@ let Service;
 module.exports.initialize = async function() {
     try {
         await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
-        //let db = mongoose.connection;
-        //db.once('open', () => {
-        console.log("in");
         User = mongoose.model('User', UserSchema);
         Service = mongoose.model('Service', ServiceSchema);
         return "Connected to MongoDB successfully.";
@@ -95,39 +92,43 @@ module.exports.initialize = async function() {
 //--------------- Read
 
 module.exports.getAllServices = async function() {
-    return await Service.find().exec();
+    return await Service.find().populate('provider').exec();
+};
+
+module.exports.getServiceById = async function(id) {
+    return await Service.find({id: id}).populate('provider').exec();
 };
 
 module.exports.getServiceByType = async function(type) {
-    return await Service.find({type: type}).exec();
+    return await Service.find({type: type}).populate('provider').exec();
 };
 
 module.exports.getServiceByProvider = async function(provider) {
-    return await Service.find({provider: provider}).exec();
+    return await Service.find({provider: provider}).populate('provider').exec();
 };
 
 module.exports.getServiceByPrice = async function(price) {
-    return await Service.find({price: price}).exec();
+    return await Service.find({price: price}).populate('provider').exec();
 };
 
 module.exports.getServiceByPriceRange = async function(min, max) {
-    return await Service.find().reduce(service => service.price >= min && service.price <= max).exec();
+    return await Service.find().populate('provider').exec().reduce(service => service.price >= min && service.price <= max);
 };
 
 module.exports.getServiceByLocation = async function(location) {
-    return await Service.find({location: location}).exec();
+    return await Service.find({location: location}).populate('provider').exec();
 };
 
 module.exports.getServiceByArea = async function(postal) {
-    return await Service.find().exec().reduce(service => service.location.postal == postal);
+    return await Service.find().populate('provider').exec().reduce(service => service.location.postal == postal);
 };
 
 module.exports.getServiceByRate = async function(rate) {
-    return await Service.find({rate: rate}).exec();
+    return await Service.find({rate: rate}).populate('provider').exec();
 };
 
 module.exports.getServiceByRateRange = async function(min, max) {
-    return await Service.find().where("rate").gte(min).lte(max).exec();
+    return await Service.find().where("rate").gte(min).lte(max).populate('provider').exec();
 };
 
 module.exports.getServiceByProviderAvailability = async function(provider) {
@@ -177,19 +178,19 @@ module.exports.deleteService = async function(id) {
 //--------------- Read
 
 module.exports.getAllUsers = async function() {
-    return await User.find().exec();
+    return await User.find().populate().exec();
 };
 
 module.exports.getUserById = async function(id) {
-    return await User.find({_id : id});
+    return await User.find({_id : id}).populate().exec();
 };
 
 module.exports.getUserByUserName = async function(userName) {
-    return await User.find({userName : userName});
+    return await User.find({userName : userName}).populate().exec();
 };
 
 module.exports.getUserByEmail = async function(email) {
-    return await User.find({email : email});
+    return await User.find({email : email}).populate().exec();
 };
 
 //--------------- Create
