@@ -63,12 +63,13 @@ class MainContainer extends Component {
 
                 </div>
 
+                {/* Commented out this part since it keeps breaking sidebar CSS */}
                 <div className="row col-sm-12 main">
-                    { this.state.hasSidebar && <div className="col-md-3"> <Sidebar/> </div> }
-                    { this.state.hasSidebarPrf && <div className="col-md-3"> <SidebarPrf/> </div> }
-                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? " col-md-offset-2 col-md-7 main" : " col-sm-12 main"}>
+                    {/* { this.state.hasSidebar && <div className="col-md-3"> <Sidebar/> </div> } */}
+                    {/* { this.state.hasSidebarPrf && <div className="col-md-3"> <SidebarPrf/> </div> } */}
+                    {/* <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? " col-md-offset-2 col-md-7 main" : " col-sm-12 main"}> */}
                     {this.props.children}
-                    </div>
+                    {/* </div> */}
                 </div>
 
                 <Footer/>

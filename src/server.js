@@ -15,14 +15,14 @@ function onHttpStart() {
     console.log("Express http server listening on: " + API_PORT);
 }
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
     next();
 });
 
-app.use(express.static("public", {index: false}));
+app.use(express.static("public", { index: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}, {useNewUrlParser: true }));
+app.use(bodyParser.urlencoded({ extended: true }, { useNewUrlParser: true }));
 
 
 //--------------- example -----------------//
@@ -71,9 +71,9 @@ const service = {
 
 //--------------- End of the creating fake objects  ---------------//
 
-app.get('/', function(req,res){
+app.get('/', function (req, res) {
     res.set('Content-Type', 'text/plain');
-    res.send({greeting: "hello quick!"});
+    res.send({ greeting: "hello quick!" });
 });
 
 app.post('/addService', (req, res) => {
@@ -96,25 +96,25 @@ app.post('/addUser', (req, res) => {
         });
 });
 
-app.get('/services', async function(req, res) {
+app.get('/services', async function (req, res) {
     let services;
     try {
         if (req.query.type) {
             services = await data_service.getServiceByType(req.query.type);
         } else if (req.query.id) {
-            services = data_service.getServiceById(req.query.id);
+            services = await data_service.getServiceById(req.query.id);
+        } else if (req.query.name) {
+            services = await data_service.getServiceByName(req.query.name);
         } else {
             services = await data_service.getAllServices();
         }
 
         res.json(services);
     }
-    catch(err) {
+    catch (err) {
         res.json(err);
     }
 });
-
-
 
 
 //--------------- end of example -----------------//
@@ -123,27 +123,27 @@ app.get('/services', async function(req, res) {
 
 
 data_service.initialize()
-    .then( (message) => {
+    .then((message) => {
 
         app.listen(API_PORT, onHttpStart);
         console.log(message);
 
         //---------- Testing database ---------------//
         //create user
-        data_service.makeUser(user)
-            .then( (user_) => {
-                    console.log(user_);
-                    service.provider = ObjectId(user_._id);
-                    data_service.makeService(service)
-                        .then((service_) => {
-                            console.log(service_);
-                            user_.providerOf.push(ObjectId(service_._id));
-                            user_.save();
-                        });
-            }).catch(err => console.log(err) );
+        // data_service.makeUser(user)
+        //     .then( (user_) => {
+        //             console.log(user_);
+        //             service.provider = ObjectId(user_._id);
+        //             data_service.makeService(service)
+        //                 .then((service_) => {
+        //                     console.log(service_);
+        //                     user_.providerOf.push(ObjectId(service_._id));
+        //                     user_.save();
+        //                 });
+        //     }).catch(err => console.log(err) );
         //---------- End of the database test -------//
 
-    }).catch(err => console.log(err) );
+    }).catch(err => console.log(err));
 
 
 

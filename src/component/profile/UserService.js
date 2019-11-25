@@ -8,29 +8,21 @@ class UserService extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            service: []
+            services: []
         }
     }
 
-    componentDidMount() {
-        //fetch from db -> json etc..
-        // this.fetchData();
-        console.log('component mounted');
-    }
-
-    fetchData(){
-        /* ajax call; figure out without using api. or maybe use API instead? */
-    }
-    // update state variable whenever user inputs.
-    onChange = (e) => {
-        this.handleUserInput(e);
-    }
-
-    handleUserInput = (e) => {
-        // const name = e.target.name;
-        // const value = e.target.value;
-        // this.setState({ [name]: value },
-        //     () => { this.validateField(name, value) });
+    async componentDidMount() {
+        try {
+            console.log("component has mounted");
+            const response = await fetch("http://localhost:3001/services?id=5dd739faa4691080aea88fde", {method: 'GET'});
+            const data = await response.json();
+            console.log(data);
+            this.setState({ services: data });
+        }
+        catch(error) {
+            console.log("ERROR: " + error);
+        }
     }
 
     onSubmit = (e) => {
@@ -62,7 +54,7 @@ class UserService extends Component {
                         </thead>
                         <tbody>
                             {/*
-                                some form of get/ fetch function to populate service state => {
+                                this.state.services.map((service, index) => {
 
                                     return(
                                         <tr>
