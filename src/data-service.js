@@ -14,7 +14,7 @@ const AddressSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-    id: ObjectId,
+    _id: ObjectId,
     userName: {
         type: String,
         unique: true,
@@ -52,7 +52,7 @@ const UserSchema = new Schema({
 });
 
 const ServiceSchema = new Schema({
-    id: ObjectId,
+    _id: ObjectId,
     type: String,
     name: String,
     provider: { type: ObjectId, ref: "User" },
@@ -96,7 +96,13 @@ module.exports.getAllServices = async function() {
 };
 
 module.exports.getServiceById = async function(id) {
-    return await Service.find({id: id}).populate('provider').exec();
+    console.log("this is data-service" + id);
+    return await Service.find({_id: id}).populate('provider').exec();
+};
+
+module.exports.getServiceByName = async function(name) {
+    console.log("searching by name" + name);
+    return await Service.find({name: name}).populate('provider').exec();
 };
 
 module.exports.getServiceByType = async function(type) {

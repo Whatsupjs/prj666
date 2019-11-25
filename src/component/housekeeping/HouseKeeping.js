@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
 import ServiceItem from "../serviceItem/ServiceItem";
+import Sidebar from '../sidebar/Sidebar';
 
 class HouseKeeping extends Component {
     constructor(props){
@@ -24,7 +25,8 @@ class HouseKeeping extends Component {
 
     render() {
         return (
-            <MainContainer highlight="House Keeping" hasSidebar={true}>
+            <MainContainer highlight="House Keeping" >
+                <Sidebar />
                 <div className="row container-fluid">
                 {
                     this.state.services.map((element, index) => {
