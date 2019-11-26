@@ -15,21 +15,17 @@ class UserService extends Component {
     async componentDidMount() {
         try {
             console.log("component has mounted");
-            const response = await fetch("http://localhost:3001/services?id=5dd739faa4691080aea88fde", {method: 'GET'});
+            let provider = sessionStorage.getItem("id");
+            console.log(provider);
+            // debugger;
+            const response = await fetch("http://localhost:3001/services?provider=" + provider, { method: 'GET' });
             const data = await response.json();
             console.log(data);
             this.setState({ services: data });
         }
-        catch(error) {
+        catch (error) {
             console.log("ERROR: " + error);
         }
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission.
-        console.log(this.state); // just checking values; remove once done.
-        /* later on implement database entry */
-        //figure out how to update to database
     }
 
     render() {
@@ -49,21 +45,20 @@ class UserService extends Component {
                                 <td>Address</td>
                                 <td>Type</td>
                                 <td># Bookings</td>
-                                <td>Creation Date</td>
                             </tr>
                         </thead>
                         <tbody>
-                            {/*
-                                this.state.services.map((service, index) => {
-
-                                    return(
-                                        <tr>
-                                            <td key={index}>{service.name}</td>
-                                            <td key={index}>{service.type}</td>
-                                        </tr>
-                                    )
-                                }
-                            */}
+                            {this.state.services.map((service, index) => {
+                                let Address = service.location.streetNumber + " " + service.location.streetName + " " + service.location.city + ", " + service.location.postal;
+                                return (
+                                    <tr key={index}>
+                                        <td >{service.name}</td>
+                                        <td >{Address}</td>
+                                        <td >{service.type}</td>
+                                        <td >{service.availability.length}</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
 

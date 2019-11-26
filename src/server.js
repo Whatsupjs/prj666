@@ -105,6 +105,9 @@ app.get('/services', async function (req, res) {
             services = await data_service.getServiceById(req.query.id);
         } else if (req.query.name) {
             services = await data_service.getServiceByName(req.query.name);
+        } else if (req.query.provider) {
+            console.log('query recognized');
+            services = await data_service.getServiceByProvider(req.query.provider);
         } else {
             services = await data_service.getAllServices();
         }
@@ -116,7 +119,22 @@ app.get('/services', async function (req, res) {
     }
 });
 
-
+app.get('/user', async function (req, res) {
+    let user;
+    try {
+        if (req.query.name) {
+            user = await data_service.getUserByUserName(req.query.username);
+        } else if (req.query.id) {
+            user = await data_service.getUserById(req.query.id);
+        } else {
+            user = await data_service.getAllUsers();
+        }
+        res.json(user);
+    }
+    catch (err) {
+        res.json(err);
+    }
+});
 //--------------- end of example -----------------//
 
 
