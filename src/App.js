@@ -8,6 +8,7 @@ import HouseKeeping from "./component/housekeeping/HouseKeeping";
 import Profile from "./component/profile/Profile";
 import UserService from './component/profile/UserService';
 import UserBooking from './component/profile/UserBooking';
+import Login from './component/login/Login'
 
 
 ////  ONLY TO TEST THE SERVICE DETAIL PAGE  ////
@@ -62,6 +63,11 @@ class App extends Component {
                     <Route exact path='/signup' render={() => (
                         <Signup />
                     )}/>
+
+                    <Route exact path='/login' render={() => (
+                        <Login />
+                    )}/>    
+
 
                     <Route exact path='/user/profile' render={() => (
                         <Profile user= { mockuser }/>

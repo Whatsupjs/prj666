@@ -30,8 +30,7 @@ class MainContainer extends Component {
                         </div>
 
                         <div className="offset-sm-5 col-sm-2" id="sign_in_up">
-                            <a href="/">Login</a> /
-                            <a href="/signup">&nbsp;Sign&nbsp;Up</a>
+                            <a href="/login">Login / Sign Up</a>
                         </div>
                     </div>
 
