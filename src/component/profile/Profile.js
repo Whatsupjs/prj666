@@ -9,19 +9,37 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: props.user
+            user: {},
+            address: {}
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //fetch from db -> json etc..
-        console.log('component mounted');
+        try {
+            console.log("component has mounted");
+            let id = sessionStorage.getItem("id");
+            console.log(id);
+            const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
+            const data = await response.json();
+            console.log('this is data: ');
+            console.log(data);
+            this.setState({ user: data[0] });
+            
+            console.log('this is current state: ');
+            console.log(this.state.user.address);
+            this.setState({ address: this.state.user.address });
+            
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }
     }
 
-    // update state variable whenever user inputs.
-    onChange = (e) => {
-        this.handleUserInput(e);
-    }
+    // // update state variable whenever user inputs.
+    // onChange = (e) => {
+    //     this.handleUserInput(e);
+    // }
 
     handleUserInput = (e) => {
         // const name = e.target.name;
@@ -86,7 +104,7 @@ class Profile extends Component {
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="street">Street:</label>
-                                        <input className="form-control" name="street" type="text" value={this.state.user.street} onChange={this.onChange} required />
+                                        <input className="form-control" name="street" type="text" value='placeholder' onChange={this.onChange} required />
                                     </div>
                                 </div>
                             </div>
@@ -95,21 +113,21 @@ class Profile extends Component {
                                 <div className="col-md-2">
                                     <div className="form-group">
                                         <label htmlFor="city">City:</label>
-                                        <input className="form-control" name="city" type="text" value={this.state.user.city} onChange={this.onChange} required />
+                                        <input className="form-control" name="city" type="text" value={this.state.address.city} onChange={this.onChange} required />
                                     </div>
                                 </div>
 
                                 <div className="col-md-2">
                                     <div className="form-group">
                                         <label htmlFor="province">Province/Territory:</label>
-                                        <input className="form-control" name="province" type="text" value={this.state.user.province} onChange={this.onChange} required />
+                                        <input className="form-control" name="province" type="text" /*value={this.state.user.address.province}*/ onChange={this.onChange} required />
                                     </div>
                                 </div>
 
                                 <div className="col-md-2">
                                     <div className="form-group">
                                         <label htmlFor="postal">Postal Code:</label>
-                                        <input className="form-control" name="postal" type="text" value={this.state.user.postal} onChange={this.onChange} required />
+                                        <input className="form-control" name="postal" type="text" /*value={this.state.user.address.postal}*/ onChange={this.onChange} required />
                                     </div>
                                 </div>
                             </div>

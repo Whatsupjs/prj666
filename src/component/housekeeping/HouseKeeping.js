@@ -27,7 +27,7 @@ class HouseKeeping extends Component {
         return (
             <MainContainer highlight="House Keeping" >
                 <Sidebar />
-                <div className="row container-fluid">
+                <div className="row container-fluid servicelist">
                 {
                     this.state.services.map((element, index) => {
                         return (
