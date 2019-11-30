@@ -143,3 +143,8 @@ div.user_profile {
   text-align: left;
   position: relative;
 }
+
+div.servicelist{
+  display: inline-block;
+  width:75%;
+}
