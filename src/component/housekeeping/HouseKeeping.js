@@ -11,7 +11,7 @@ class HouseKeeping extends Component {
        }
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         try {
             const response = await fetch("http://localhost:3001/services?type=House%20Keeping", {method: 'GET'});
             const data = await response.json();
