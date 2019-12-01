@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
-import SidebarPrf from '../sidebar/SidebarPrf';
-
 
 
 class Profile extends Component {
@@ -25,11 +23,11 @@ class Profile extends Component {
             console.log('this is data: ');
             console.log(data);
             this.setState({ user: data[0] });
-            
+
             console.log('this is current state: ');
             console.log(this.state.user.address);
             this.setState({ address: this.state.user.address });
-            
+
         }
         catch (error) {
             console.log("ERROR: " + error);
@@ -57,9 +55,8 @@ class Profile extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer hasSidebarPrf={true} highlight="profile">
 
-                <SidebarPrf highlight="profile" />
                 <div className="user_profile">
                     <br />
                     <h2>User Profile</h2>
@@ -138,7 +135,7 @@ class Profile extends Component {
                     </form>
                 </div>
 
-            </MainContainer >
+            </MainContainer>
 
         );
     }
