@@ -38,9 +38,8 @@ class UserBooking extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer hasSidebarPrf={true} highlight="booking">
 
-                <SidebarPrf highlight="booking" />
                 <div className="user_profile">
                     <br />
                     <h2>User Bookings</h2>
@@ -74,7 +73,7 @@ class UserBooking extends Component {
 
                 </div>
 
-            </MainContainer >
+            </MainContainer>
 
         );
     }

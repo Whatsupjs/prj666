@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class SidebarPrf extends Component {
     render() {
         return (
-            <div id="prf" className="col-sm-2 sidebar">
+            <div id="prf" className="sidebar">
                 <br />
                 <div className="Profile">
                     <ul className="nav-sidebar">

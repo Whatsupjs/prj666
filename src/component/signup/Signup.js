@@ -25,14 +25,14 @@ class Signup extends Component {
     // update state variable whenever user inputs.
     onChange = (e) => {
         this.handleUserInput(e);
-    }
+    };
 
     handleUserInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({ [name]: value },
             () => { this.validateField(name, value) });
-    }
+    };
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
@@ -75,7 +75,7 @@ class Signup extends Component {
         console.log(this.state); // just checking values; remove once done.
         this.setState(() => ({ toProfile: true }));
         /* later on implement database entry */
-    }
+    };
 
     render() {
         if (this.state.toProfile === true) {

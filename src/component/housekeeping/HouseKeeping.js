@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
 import ServiceItem from "../serviceItem/ServiceItem";
-import Sidebar from '../sidebar/Sidebar';
 
 class HouseKeeping extends Component {
     constructor(props){
@@ -25,14 +24,13 @@ class HouseKeeping extends Component {
 
     render() {
         return (
-            <MainContainer highlight="House Keeping" >
-                <Sidebar />
-                <div className="row container-fluid servicelist">
+            <MainContainer highlight="House Keeping" hasSidebar={true}>
+                <div className="row container-fluid" style={{width: '100%'}}>
                 {
                     this.state.services.map((element, index) => {
                         return (
 
-                            <div key={index} className="col-md-8 col-md-offset-1">
+                            <div key={index} className="col-md-6">
                                 <ServiceItem service={element}/>
                             </div>
 

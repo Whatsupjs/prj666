@@ -30,9 +30,8 @@ class UserService extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer hasSidebarPrf={true} highlight="service">
 
-                <SidebarPrf highlight="service" />
                 <div className="user_profile">
                     <br />
                     <h2>User Services</h2>
