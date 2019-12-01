@@ -65,7 +65,7 @@ class MainContainer extends Component {
                 <div className="row">
                     { this.state.hasSidebar && <div className="col-md-push-3"> <Sidebar/> </div> }
                     { this.state.hasSidebarPrf && <div className="col-md-push-3"> <SidebarPrf highlight={this.state.highlight}/> </div> }
-                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"}>
+                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{backgroundColor: ''}}>
                     {this.props.children}
                     </div>
                 </div>

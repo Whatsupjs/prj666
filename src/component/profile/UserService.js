@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
-import SidebarPrf from '../sidebar/SidebarPrf';
 
 
 class UserService extends Component {

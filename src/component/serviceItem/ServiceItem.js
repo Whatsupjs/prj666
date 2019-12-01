@@ -15,23 +15,27 @@ class ServiceItem extends Component {
     render() {
         const image = require('../../images/' + `${this.state.image}`);
         return (
-                <div className="panel panel-default" style={{border: '2px solid', pading: '2px'}}>
-                    <div className="panel-heading">
+                <div className="card" style={{border: '4px solid lightsteelblue', margin: '6px', backgroundColor: 'azure'}}>
+                    <div className="card-header">
                         <strong>{this.state.service.provider.firstName} {this.state.service.provider.lastName}</strong>
                     </div>
-                    <div className="panel-body">
-                        <div className="col-md-3">
+                    <div className="card-body">
+                        <div className="">
+                            <br/>
                             <img className="img-thumbnail" src={image} alt="HK"/>
                         </div>
-                        <div className="col-md-9">
+                        <div className="">
+                            <br/>
                             Phone Number: {this.state.service.provider.phone}
                             <br/>
                             Email: {this.state.service.provider.email}
                             <br/>
                             Rate: {this.state.service.provider.rate}
                             <br/>
-                            <a href="/">Details</a>
                         </div>
+                    </div>
+                    <div className="card-footer">
+                        <a href="/" className="btn btn-primary">Details</a>
                     </div>
                 </div>
         );

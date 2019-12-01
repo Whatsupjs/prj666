@@ -79,7 +79,8 @@ body {
 } */
 @media (min-width: 768px) {
   .sidebar {
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     /*position: relative;*/
     top: 0;
     /*bottom: 96px;*/
