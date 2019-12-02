@@ -76,6 +76,7 @@ app.get('/', function (req, res) {
     res.send({ greeting: "hello quick!" });
 });
 
+/* --------------------- POST Requests ----------------------- */
 app.post('/addService', (req, res) => {
     data_service.makeService(req.body)        //needs to pass service in req.body in real use case
         .then((message) => {
@@ -96,6 +97,20 @@ app.post('/addUser', (req, res) => {
         });
 });
 
+app.post('/updateUser', (req, res) => {
+    console.log("update recognized in server.js");
+    console.log(req.body);
+    data_service.updateUser(req.body)            //needs to pass user in req.body in real use case
+        .then((message) => {
+            res.json(message);
+        })
+        .catch((err) => {
+            res.json(err);
+        });
+});
+
+
+/* --------------------- GET Requests ----------------------- */
 app.get('/services', async function (req, res) {
     let services;
     try {
@@ -106,7 +121,6 @@ app.get('/services', async function (req, res) {
         } else if (req.query.name) {
             services = await data_service.getServiceByName(req.query.name);
         } else if (req.query.provider) {
-            console.log('query recognized');
             services = await data_service.getServiceByProvider(req.query.provider);
         } else {
             services = await data_service.getAllServices();
