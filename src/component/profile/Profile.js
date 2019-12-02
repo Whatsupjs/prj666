@@ -21,7 +21,7 @@ class Profile extends Component {
             console.log("component has mounted");
 
             //get user id from session storage to track client's userid
-            let id = sessionStorage.getItem("id");
+            const id = sessionStorage.getItem("id");
 
             const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
             const data = await response.json();
@@ -41,7 +41,7 @@ class Profile extends Component {
     onChange = (e) => {
         //identifiers for address columns 
         let addressvar = ["streetNumber", "streetName", "city", "province", "postal"];
-       
+
         if (addressvar.indexOf(e.target.name) >= 0) {
             this.handleAddressInput(e);
         } else {
@@ -52,7 +52,7 @@ class Profile extends Component {
     // handles nested addressobj field inputs
     // NOTE * setState DOES NOT HANDLE NESTED OBJECT BY DEFAULT, HENCE REPEATED prevState
     handleAddressInput = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         this.setState(prevState => ({
             ...prevState,
@@ -68,7 +68,7 @@ class Profile extends Component {
 
     //handles userobj inputs
     handleUserInput = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
 
         this.setState(prevState => ({
             user: {
@@ -79,11 +79,36 @@ class Profile extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission.
+        e.preventDefault();  //prevent page refresh
 
+        const data = this.state.user;
 
-        console.log(this.state.user); // just checking values; remove once done.
+        this.updateUser(data);
 
+    }
+
+    //send updated user data into DB
+    async updateUser(data) {
+        //get user id from session storage to track client's userid
+        // const id = sessionStorage.getItem("id");
+        try {
+            console.log("Posting")
+            console.log(data);
+            const request = new Request("http://localhost:3001/updateUser", {
+                method: 'POST',
+                // headers: {
+                //     Accept: 'application/json',
+                //     'Content-Type': 'application/json'
+                // },
+                body: data
+            });
+
+            const response = await fetch(request);
+            const status = await response.status;
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }
     }
 
     render() {
