@@ -16,8 +16,7 @@ class ServiceDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            serviceProvider: props.serviceProvider,
-            stars: "⭐⭐️⭐️⭐️⭐️️"  /* only to demonstrate the component. will be deleted later*/
+            serviceProvider: props.serviceProvider
         }
     }
 
@@ -28,7 +27,7 @@ class ServiceDetail extends Component {
         /* a plug-in to be added later */
         let options = {
             max_value: 5,
-            step_size: 0.5,
+            step_size: 1,
             initial_value: this.state.serviceProvider.rate,
             readonly: true
         }
@@ -37,6 +36,13 @@ class ServiceDetail extends Component {
     }
 
     render() {
+        if (this.state.serviceProvider.rate == 1) { this.state.stars = "★☆☆☆☆"; }
+        else if (this.state.serviceProvider.rate == 2) { this.state.stars = "★★☆☆☆"; }
+        else if (this.state.serviceProvider.rate == 3) { this.state.stars = "★★★☆☆"; }
+        else if (this.state.serviceProvider.rate == 4) { this.state.stars = "★★★★☆"; }
+        else if (this.state.serviceProvider.rate == 5) { this.state.stars = "★★★★★"; }
+        else { this.state.stars = "☆☆☆☆☆"; }
+
         return (
             <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
@@ -69,7 +75,7 @@ class ServiceDetail extends Component {
                             <div className="col-sm-6">
                                 {/* rating now is based on a static value only to show the componet*/}
                                 <br/>
-                                <div className="to_be_defined"><h2><strong>{this.state.stars}</strong></h2></div>
+                                <div className="to_be_defined"><h1><strong>{this.state.stars}</strong></h1></div>
                                 <br/>
                                 <h3 className='text-left'>Comments:</h3>
                                 <br/>
