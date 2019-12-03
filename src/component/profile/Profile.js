@@ -112,7 +112,7 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.isMounted == false) return (<p>run the server</p>)
+        if (this.state.isMounted === false) return (<p>run the server</p>)
         else {
             return (
                 <MainContainer hasSidebarPrf={true} highlight="profile">

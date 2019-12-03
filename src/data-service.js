@@ -15,10 +15,10 @@ module.exports.initialize = async function() {
     try {
         // 'mongoose.connect' is a simplified version of 'mongoose.createConnection'
         // Utilized when only one connection is required
-        let db = await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
-        User = db.model('User', UserSchema);
-        Service = db.model('Service', ServiceSchema);
-        Address = db.model('Address', ServiceSchema);
+        await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+        User = UserSchema;
+        Service = ServiceSchema;
+        Address = ServiceSchema;
         return "Connected to MongoDB successfully.";
     }
     catch(err) {
