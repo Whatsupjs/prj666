@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,8 +11,29 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import MainContainer from '../maincontainer/MainContainer';
+import { Redirect, withRouter } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
+
+class Login extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            repassword: '',
+            formErrors: { email: '', password: '', repassword: '' },
+            emailValid: false,
+            passwordVaild: false,
+            formValid: false,
+            toProfile: false
+        }
+    }
+
+ useStyles = makeStyles(theme => ({
   '@global': {
     body: {
       backgroundColor: theme.palette.common.white,
@@ -38,21 +59,78 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Login() {
-  const classes = useStyles();
+    // update state variable whenever user inputs.
+    onChange = (e) => {
+        this.handleUserInput(e);
+    }
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
+    handleUserInput = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({ [name]: value },
+            () => { this.validateField(name, value) });
+    }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+
+        switch (fieldName) {
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+                break;
+            case 'repassword':
+                passwordValid = value === this.state.password;
+                fieldValidationErrors.password = passwordValid ? '' : ' does not match';
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid
+        }, this.validateForm);
+    }
+
+    validateForm() {
+        this.setState({ formValid: this.state.emailValid && this.state.passwordValid });
+    }
+
+    errorClass(error) {
+        return (error.length === 0 ? '' : 'has-error');
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();   //prevents actual submission.
+        console.log(this.state); // just checking values; remove once done.
+        this.setState(() => ({ toProfile: true }));
+        /* later on implement database entry */
+    }
+
+    render() {
+        if (this.state.toProfile === true) {
+            return <Redirect to='/user/profile' />
+        }
+
+        return (
+            <MainContainer>
+                     <CssBaseline />
+      <div className="login">
+         <Avatar>
+           <LockOutlinedIcon />
+         </Avatar>
+         <Typography component="h1" variant="h5">
+           Sign in
+         </Typography>
+         <form onSubmit={this.onSubmit}>
+           <TextField
             variant="outlined"
             margin="normal"
             required
@@ -83,7 +161,6 @@ export default function Login() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
           >
             Sign In
           </Button>
@@ -101,8 +178,16 @@ export default function Login() {
           </Grid>
         </form>
       </div>
-    </Container>
-  );
+            </MainContainer >
+
+        );
+    }
 }
 
-//export default Login
+export default Login;
+
+
+
+
+
+
