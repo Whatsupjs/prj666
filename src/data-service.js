@@ -1,86 +1,29 @@
 const mongoose = require('mongoose');
 const uri = `mongodb+srv://reza:rezaadmin1@quickservice-jnovb.mongodb.net/quickService?retryWrites=true&w=majority`;
 
-const Schema = mongoose.Schema;
-let ObjectId = mongoose.Types.ObjectId;
+// Load the schemas
+const UserSchema = require('./models/userModel.js');
+const ServiceSchema = require('./models/serviceModel.js');
+const AddressSchema = require('./models/addressModel.js');
 
-
-const AddressSchema = new Schema({
-    streetNumber: String,
-    streetName: String,
-    city: String,
-    province: String,
-    postal: String
-});
-
-const UserSchema = new Schema({
-    _id: ObjectId,
-    userName: {
-        type: String,
-        unique: true,
-        trim: true,
-        required: "Username is Required",
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: "Password is Required",
-        validate: [
-            function(input) {
-                return input.length >= 6;
-            },
-            "Password should be longer."
-        ]
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
-    },
-    phone: String,
-    address: AddressSchema,
-    providerOf: [{ type: ObjectId, ref: 'Service' }],
-    userOf: [{ type: ObjectId, ref: 'Service' }]
-});
-
-const ServiceSchema = new Schema({
-    _id: ObjectId,
-    type: String,
-    name: String,
-    provider: { type: ObjectId, ref: "User" },
-    price: Number,
-    location: AddressSchema,
-    introduction: String,
-    detail: String,
-    rate: { type: Number, min: 0, max: 5 },
-    image: String,
-    availability: [{ date: Date, booked: Boolean, by: { type: ObjectId, ref: "User" } }],
-    comments: [{ type: String, author: { type: ObjectId, ref: "User" }, date: Date }]
-});
-
-let User;
+// Defined on connection to the new mongoose instance
+let User; 
 let Service;
+let Address;
 
 module.exports.initialize = async function() {
     try {
-        await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
-        User = mongoose.model('User', UserSchema);
-        Service = mongoose.model('Service', ServiceSchema);
+        // 'mongoose.connect' is a simplified version of 'mongoose.createConnection'
+        // Utilized when only one connection is required
+        let db = await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+        User = db.model('User', UserSchema);
+        Service = db.model('Service', ServiceSchema);
+        Address = db.model('Address', ServiceSchema);
         return "Connected to MongoDB successfully.";
     }
     catch(err) {
         console.log(err);
     }
-
-
 }
 
 
@@ -138,7 +81,7 @@ module.exports.getServiceByRateRange = async function(min, max) {
 };
 
 module.exports.getServiceByProviderAvailability = async function(provider) {
-    await getServiceByProvider(provider).then( async function(service) {
+    await this.getServiceByProvider(provider).then(async function(service) {
         return await service.availability.reduce( av => !av.booked );
     });
 };
