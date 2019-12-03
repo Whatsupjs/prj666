@@ -79,7 +79,7 @@ class Profile extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();  //prevent page refresh
+        // e.preventDefault();  //prevent page refresh //want to refresh
 
         const data = this.state.user;
 
@@ -96,11 +96,11 @@ class Profile extends Component {
             console.log(data);
             const request = new Request("http://localhost:3001/updateUser", {
                 method: 'POST',
-                // headers: {
-                //     Accept: 'application/json',
-                //     'Content-Type': 'application/json'
-                // },
-                body: data
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
             });
 
             const response = await fetch(request);
@@ -112,7 +112,7 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.isMounted == false) return null
+        if (this.state.isMounted == false) return (<p>run the server</p>)
         else {
             return (
                 <MainContainer hasSidebarPrf={true} highlight="profile">
