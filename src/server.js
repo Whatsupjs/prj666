@@ -17,6 +17,7 @@ function onHttpStart() {
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
 
@@ -99,7 +100,7 @@ app.post('/addUser', (req, res) => {
 
 app.post('/updateUser', (req, res) => {
     console.log("update recognized in server.js");
-    console.log(req.body);
+    // console.log(req.body);
     data_service.updateUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);

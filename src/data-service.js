@@ -208,6 +208,5 @@ module.exports.makeUser = async function(user) {
 
 //--------------- Update
 module.exports.updateUser = async function(user) {
-    console.log(user);
     return await User.findByIdAndUpdate(user._id, user).exec();
 };
