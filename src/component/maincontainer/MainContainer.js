@@ -28,9 +28,8 @@ class MainContainer extends Component {
                             </form>
                         </div>
 
-                        <div className="offset-md-5 col-md-2" id="sign_in_up">
-                            <a href="/">Login</a> /
-                            <a href="/signup">&nbsp;Sign&nbsp;Up</a>
+                        <div className="offset-sm-5 col-sm-2" id="sign_in_up">
+                            <a href="/login">Login / Sign Up</a>
                         </div>
                     </div>
 
