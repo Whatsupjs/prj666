@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
-import SidebarPrf from '../sidebar/SidebarPrf';
 
 
 class UserService extends Component {
@@ -15,10 +14,9 @@ class UserService extends Component {
     async componentDidMount() {
         try {
             console.log("component has mounted");
-            let provider = sessionStorage.getItem("id");
-            console.log(provider);
+            let id = sessionStorage.getItem("id");
             // debugger;
-            const response = await fetch("http://localhost:3001/services?provider=" + provider, { method: 'GET' });
+            const response = await fetch("http://localhost:3001/services?provider=" + id, { method: 'GET' });
             const data = await response.json();
             console.log(data);
             this.setState({ services: data });
@@ -30,9 +28,8 @@ class UserService extends Component {
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer hasSidebarPrf={true} highlight="service">
 
-                <SidebarPrf highlight="service" />
                 <div className="user_profile">
                     <br />
                     <h2>User Services</h2>

@@ -8,39 +8,31 @@ class UserBooking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            booking: []
+            user: {},
+            service: []
         }
     }
 
-    componentDidMount() {
-        //fetch from db -> json etc..
-        console.log('component mounted');
+    async componentDidMount() {
+        try {
+            console.log("component has mounted");
+            let id = sessionStorage.getItem("id");
+            // debugger;
+            const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
+            const data = await response.json();
+            console.log(data);
+            this.setState({ user: data[0] });
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }
     }
 
-    // update state variable whenever user inputs.
-    onChange = (e) => {
-        this.handleUserInput(e);
-    }
-
-    handleUserInput = (e) => {
-        // const name = e.target.name;
-        // const value = e.target.value;
-        // this.setState({ [name]: value },
-        //     () => { this.validateField(name, value) });
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission.
-        console.log(this.state); // just checking values; remove once done.
-        /* later on implement database entry */
-        //figure out how to update to database
-    }
 
     render() {
         return (
-            <MainContainer>
+            <MainContainer hasSidebarPrf={true} highlight="booking">
 
-                <SidebarPrf highlight="booking" />
                 <div className="user_profile">
                     <br />
                     <h2>User Bookings</h2>
@@ -74,7 +66,7 @@ class UserBooking extends Component {
 
                 </div>
 
-            </MainContainer >
+            </MainContainer>
 
         );
     }
