@@ -1,7 +1,15 @@
+require('../config');
 const mongoose = require('mongoose');
+// const user = process.env.USER;
+// const pass = process.env.PASSWORD;
+// const uri = `mongodb+srv://${user}:${pass}@quickservice-jnovb.mongodb.net/quickService?retryWrites=true&w=majority`;
+
+//////////////////////////////////////
+// REMOVE AFTER TESTING IS FINISHED //
+//////////////////////////////////////
 const uri = `mongodb+srv://reza:rezaadmin1@quickservice-jnovb.mongodb.net/quickService?retryWrites=true&w=majority`;
 
-// Load the schemas
+// Load the Schemas
 const UserSchema = require('./models/userModel.js');
 const ServiceSchema = require('./models/serviceModel.js');
 const AddressSchema = require('./models/addressModel.js');
@@ -11,7 +19,7 @@ let User;
 let Service;
 let Address;
 
-module.exports.initialize = async function() {
+module.exports.initialize = async function() {  
     try {
         // 'mongoose.connect' is a simplified version of 'mongoose.createConnection'
         // Utilized when only one connection is required
