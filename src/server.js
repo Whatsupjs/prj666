@@ -33,39 +33,40 @@ app.use(bodyParser.urlencoded({ extended: true }, { useNewUrlParser: true }));
 //---- but to test, I am making those objects here
 
 const address1 = {
-    streetNumber: "22",
-    streetName: "Honest's Avenue",
+    streetNumber: "333",
+    streetName: "Testing Avenue",
     city: "Toronto",
     province: "Ontario",
-    postal: "L2L 4P4"
+    postal: "L3L 3P3"
 };
 
 const address2 = {
-    streetNumber: "29",
-    streetName: "Winter St.",
+    streetNumber: "33",
+    streetName: "Testing St.",
     city: "Toronto",
     province: "Ontario",
-    postal: "N2M 2P3"
+    postal: "N3M 3P3"
 };
 
 const user = {
-    userName: "sunny",
-    password: "sydny332",
-    firstName: "Hummer",
+    userName: "The3dealer",
+    password: "dealer333",
+    firstName: "Dealer",
     lastName: "Simpson",
-    phone: "647-345-7878",
-    email: "salutation@gmail.com",
+    phone: "647-333-3333",
+    email: "dealer333@gmail.com",
     address: address1
 };
 
 const service = {
     type: "House Keeping",
-    name: "Wash it Up!",
+    name: "$3 Wash Ltd.",
     provider: undefined,
-    price: 55.55,
+    price: 3.00,
     location: address2,
-    introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    detail: "Some detail",
+    introduction: "Best deal ever!",
+    detail: "ONLY $3",
+    rate: 3,
     image: "./welding.jpg",    // the test image is located in the same folder as the component. for test we don,t need path
     comments: undefined
 };

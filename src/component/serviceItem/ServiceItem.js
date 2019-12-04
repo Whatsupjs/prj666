@@ -13,6 +13,13 @@ class ServiceItem extends Component {
     }
 
     render() {
+        if (this.state.service.rate == 1) { this.state.service.provider.stars = "★☆☆☆☆"; }
+        else if (this.state.service.rate == 2) { this.state.service.provider.stars = "★★☆☆☆"; }
+        else if (this.state.service.rate == 3) { this.state.service.provider.stars = "★★★☆☆"; }
+        else if (this.state.service.rate == 4) { this.state.service.provider.stars = "★★★★☆"; }
+        else if (this.state.service.rate == 5) { this.state.service.provider.stars = "★★★★★"; }
+        else { this.state.service.provider.stars = "☆☆☆☆☆"; }
+
         const image = require('../../images/' + `${this.state.image}`);
         return (
                 <div className="card" style={{border: '4px solid lightsteelblue', margin: '6px', backgroundColor: 'azure'}}>
@@ -30,7 +37,7 @@ class ServiceItem extends Component {
                             <br/>
                             Email: {this.state.service.provider.email}
                             <br/>
-                            Rate: {this.state.service.provider.rate}
+                            Rate: {this.state.service.provider.stars}
                             <br/>
                         </div>
                     </div>
