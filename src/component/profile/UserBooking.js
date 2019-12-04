@@ -9,7 +9,7 @@ class UserBooking extends Component {
         super(props);
         this.state = {
             user: {},
-            service: []
+            services: []
         }
     }
 
@@ -22,6 +22,7 @@ class UserBooking extends Component {
             const data = await response.json();
             console.log(data);
             this.setState({ user: data[0] });
+            this.setState({ services: this.state.user.userOf });
         }
         catch (error) {
             console.log("ERROR: " + error);
@@ -49,17 +50,17 @@ class UserBooking extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {/*
-                                some form of get/ fetch function to populate service state => {
-
-                                    return(
-                                        <tr>
-                                            <td key={index}>{service.name}</td>
-                                            <td key={index}>{service.type}</td>
-                                        </tr>
-                                    )
-                                }
-                            */}
+                            {this.state.services.map((service, index) => {
+                                let Address = service.location.streetNumber + " " + service.location.streetName + " " + service.location.city + ", " + service.location.postal;
+                                return (
+                                    <tr key={index}>
+                                        <td >{service.name}</td>
+                                        <td >{Address}</td>
+                                        <td >{service.type}</td>
+                                        <td >{service.availability.length}</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
 

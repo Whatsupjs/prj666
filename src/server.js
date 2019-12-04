@@ -89,6 +89,7 @@ app.post('/addService', (req, res) => {
 });
 
 app.post('/addUser', (req, res) => {
+    console.log(req.body);
     data_service.makeUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);
@@ -99,8 +100,6 @@ app.post('/addUser', (req, res) => {
 });
 
 app.post('/updateUser', (req, res) => {
-    console.log("update recognized in server.js");
-    // console.log(req.body);
     data_service.updateUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);
