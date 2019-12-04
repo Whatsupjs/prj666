@@ -1,7 +1,8 @@
 require('../config');
 const express = require("express");
 const bodyParser = require("body-parser");
-const data_service = require("./data-service.js");
+const { initialize } = require("./MongoDB");
+const data_service = require("./data-service");
 
 const mongoose = require('mongoose');
 let ObjectId = mongoose.Types.ObjectId;
@@ -49,12 +50,12 @@ const address2 = {
 };
 
 const user = {
-    userName: "The3dealer",
+    userName: "The5dealer",
     password: "dealer333",
     firstName: "Dealer",
     lastName: "Simpson",
     phone: "647-333-3333",
-    email: "dealer333@gmail.com",
+    email: "dealer55@gmail.com",
     address: address1
 };
 
@@ -67,12 +68,12 @@ const service = {
     introduction: "Best deal ever!",
     detail: "ONLY $3",
     rate: 3,
-    image: "./welding.jpg",    // the test image is located in the same folder as the component. for test we don,t need path
+    image: "welding.jpg",
     comments: undefined
 };
 
 //--------------- End of the creating fake objects  ---------------//
-
+// testing API server
 app.get('/', function (req, res) {
     res.set('Content-Type', 'text/plain');
     res.send({ greeting: "hello quick!" });
@@ -151,12 +152,12 @@ app.get('/user', async function (req, res) {
         res.json(err);
     }
 });
-//--------------- end of example -----------------//
+//--------------- end of POST & GET -----------------//
 
 
 
 
-data_service.initialize()
+initialize()
     .then((message) => {
 
         app.listen(API_PORT, onHttpStart);
