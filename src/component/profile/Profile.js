@@ -21,14 +21,16 @@ class Profile extends Component {
             console.log("component has mounted");
 
             //get user id from session storage to track client's userid
-            const id = sessionStorage.getItem("id");
+            const id = sessionStorage.getItem("email");
 
-            const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
+            const response = await fetch("http://localhost:3001/user?email=" + id, { method: 'GET' });
             const data = await response.json();
             console.log('this is data: ');
             console.log(data);
             this.setState({ user: data[0] });
 
+            sessionStorage.setItem("id", this.state.user._id);
+            console.log(sessionStorage.getItem("id"));
             //wait until data gets populated ****** this is important leave it.
             this.setState({ isMounted: true });
         }
@@ -112,7 +114,18 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.isMounted == false) return (<p>run the server</p>)
+        if (this.state.isMounted == false) {
+            return (
+                <MainContainer hasSidebarPrf={true} highlight="profile">
+
+                    <div className="user_profile">
+                        <br />
+                        <h2>User Profile</h2>
+                        <br />
+                    </div>
+                </MainContainer>
+            )
+        }
         else {
             return (
                 <MainContainer hasSidebarPrf={true} highlight="profile">

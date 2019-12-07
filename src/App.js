@@ -36,19 +36,7 @@ const serviceProvider = {
     ]
 }
 
-// MOCK DATA //
-const mockuser = {
-    firstName: 'Jack',
-    lastName: 'Daniels',
-    email: 'jd123@gmail.com',
-    phone: '416-234-1234',
-    street: '123 Fake Street',
-    city: 'Springfield',
-    province: 'ON',
-    postal: 'L1H 2H4'
-}
-
-sessionStorage.setItem("id", "5dd739f9a4691080aea88fdc");
+// sessionStorage.setItem("email", "cheersallgoods@gmail.com");
 //................................................////
 
 
@@ -74,7 +62,7 @@ class App extends Component {
 
 
                     <Route exact path='/user/profile' render={() => (
-                        <Profile user= { mockuser }/>
+                        <Profile/>
                     )}/>
                     
                     <Route exact path='/user/service' render={() => (

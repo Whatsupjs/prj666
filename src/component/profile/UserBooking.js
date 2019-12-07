@@ -57,14 +57,13 @@ class UserBooking extends Component {
                                         <td >{service.name}</td>
                                         <td >{Address}</td>
                                         <td >{service.type}</td>
+                                        <td> {service.provider.email}</td>
                                         <td >{service.availability.length}</td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
-
-
                 </div>
 
             </MainContainer>

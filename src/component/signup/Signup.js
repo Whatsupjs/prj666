@@ -10,10 +10,13 @@ class Signup extends Component {
         super(props);
         this.state = {
             user: {
+                userName: '',
+                password: '',
                 firstName: '',
                 lastName: '',
+                phone: '',
                 email: '',
-                password: ''
+                address: ''
             },
             repassword: '',
             formErrors: { email: '', password: '', repassword: '' },
@@ -34,6 +37,15 @@ class Signup extends Component {
 
         if (e.target.name === 'repassword') {
             this.setState({ [name]: value }, () => { this.validateField(name, value) });
+        } else if(e.target.name === 'email') {
+            this.setState(prevState => ({
+                user: {
+                    ...prevState.user,
+                    [name]: value,
+                    userName: value
+                }
+            }),
+                () => { this.validateField(name, value) });
         } else {
             this.setState(prevState => ({
                 user: {
@@ -106,13 +118,16 @@ class Signup extends Component {
     }
 
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission.
-        console.log(this.state.user); // just checking values; remove once done.
-        // this.setState(() => ({ toProfile: true }));
-        
-        const data = this.state.user;
+        e.preventDefault();   //prevents page refresh.
 
+        //store this user into data for post req. 
+        const data = this.state.user;
+        console.log(data);
         this.addUser(data);
+
+        //set sessionStorage to ref. current user
+        sessionStorage.setItem('email', this.state.user.email);
+        // this.setState(() => ({ toProfile: true }));
     };
 
     render() {
