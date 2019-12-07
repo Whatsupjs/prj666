@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 let ObjectId = mongoose.Types.ObjectId;
 
 const ServiceSchema = new Schema({
-    _id: ObjectId,
+    // please do not change id to _id
+    id: ObjectId,
     type: String,
     name: String,
     provider: { type: ObjectId, ref: "User" },

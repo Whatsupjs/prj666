@@ -1,7 +1,8 @@
 require('../config');
 const express = require("express");
 const bodyParser = require("body-parser");
-const data_service = require("./data-service.js");
+const { initialize } = require("./MongoDB");
+const data_service = require("./data-service");
 
 const mongoose = require('mongoose');
 let ObjectId = mongoose.Types.ObjectId;
@@ -33,45 +34,46 @@ app.use(bodyParser.urlencoded({ extended: true }, { useNewUrlParser: true }));
 //---- but to test, I am making those objects here
 
 const address1 = {
-    streetNumber: "22",
-    streetName: "Honest's Avenue",
+    streetNumber: "333",
+    streetName: "Testing Avenue",
     city: "Toronto",
     province: "Ontario",
-    postal: "L2L 4P4"
+    postal: "L3L 3P3"
 };
 
 const address2 = {
-    streetNumber: "29",
-    streetName: "Winter St.",
+    streetNumber: "33",
+    streetName: "Testing St.",
     city: "Toronto",
     province: "Ontario",
-    postal: "N2M 2P3"
+    postal: "N3M 3P3"
 };
 
 const user = {
-    userName: "sunny",
-    password: "sydny332",
-    firstName: "Hummer",
+    userName: "The5dealer",
+    password: "dealer333",
+    firstName: "Dealer",
     lastName: "Simpson",
-    phone: "647-345-7878",
-    email: "salutation@gmail.com",
+    phone: "647-333-3333",
+    email: "dealer55@gmail.com",
     address: address1
 };
 
 const service = {
     type: "House Keeping",
-    name: "Wash it Up!",
+    name: "$3 Wash Ltd.",
     provider: undefined,
-    price: 55.55,
+    price: 3.00,
     location: address2,
-    introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    detail: "Some detail",
-    image: "./welding.jpg",    // the test image is located in the same folder as the component. for test we don,t need path
+    introduction: "Best deal ever!",
+    detail: "ONLY $3",
+    rate: 3,
+    image: "welding.jpg",
     comments: undefined
 };
 
 //--------------- End of the creating fake objects  ---------------//
-
+// testing API server
 app.get('/', function (req, res) {
     res.set('Content-Type', 'text/plain');
     res.send({ greeting: "hello quick!" });
@@ -151,12 +153,12 @@ app.get('/user', async function (req, res) {
         res.json(err);
     }
 });
-//--------------- end of example -----------------//
+//--------------- end of POST & GET -----------------//
 
 
 
 
-data_service.initialize()
+initialize()
     .then((message) => {
 
         app.listen(API_PORT, onHttpStart);

@@ -60,7 +60,6 @@ class App extends Component {
                         <Login />
                     )}/>    
 
-
                     <Route exact path='/user/profile' render={() => (
                         <Profile/>
                     )}/>
@@ -73,13 +72,8 @@ class App extends Component {
                         <UserBooking />
                     )}/>
 
-                    
-
                     <Route exact path='/booking' render={() => (
-                        
                         <Booking />
-            
-                       
                     )}/>
 
                     {/*temporary*/

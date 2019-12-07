@@ -1,89 +1,6 @@
-const mongoose = require('mongoose');
-const uri = `mongodb+srv://reza:rezaadmin1@quickservice-jnovb.mongodb.net/quickService?retryWrites=true&w=majority`;
-
-const Schema = mongoose.Schema;
-let ObjectId = mongoose.Types.ObjectId;
-
-
-const AddressSchema = new Schema({
-    streetNumber: String,
-    streetName: String,
-    city: String,
-    province: String,
-    postal: String
-});
-
-const UserSchema = new Schema({
-    _id: ObjectId,
-    userName: {
-        type: String,
-        unique: true,
-        trim: true,
-        required: "Username is Required",
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: "Password is Required",
-        validate: [
-            function(input) {
-                return input.length >= 6;
-            },
-            "Password should be longer."
-        ]
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
-    },
-    phone: String,
-    address: AddressSchema,
-    providerOf: [{ type: ObjectId, ref: 'Service' }],
-    userOf: [{ type: ObjectId, ref: 'Service' }]
-});
-
-const ServiceSchema = new Schema({
-    _id: ObjectId,
-    type: String,
-    name: String,
-    provider: { type: ObjectId, ref: "User" },
-    price: Number,
-    location: AddressSchema,
-    introduction: String,
-    detail: String,
-    rate: { type: Number, min: 0, max: 5 },
-    image: String,
-    availability: [{ date: Date, booked: Boolean, by: { type: ObjectId, ref: "User" } }],
-    comments: [{ type: String, author: { type: ObjectId, ref: "User" }, date: Date }]
-});
-
-let User;
-let Service;
-
-module.exports.initialize = async function() {
-    try {
-        await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
-        User = mongoose.model('User', UserSchema);
-        Service = mongoose.model('Service', ServiceSchema);
-        return "Connected to MongoDB successfully.";
-    }
-    catch(err) {
-        console.log(err);
-    }
-
-
-}
-
-
+// Database needs to be initialized before using this module
+const User = require('./models/userModel.js');
+const Service = require('./models/serviceModel.js');
 
 
 
@@ -138,7 +55,7 @@ module.exports.getServiceByRateRange = async function(min, max) {
 };
 
 module.exports.getServiceByProviderAvailability = async function(provider) {
-    await getServiceByProvider(provider).then( async function(service) {
+    await this.getServiceByProvider(provider).then(async function(service) {
         return await service.availability.reduce( av => !av.booked );
     });
 };

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import '../../index.css';
 
-//folder name change?
-
 class Footer extends Component {
     render() {
         const contact = 'Contact QuickService \n Seneca@York Campus \n 70 The Pond Road \n Toronto, ON M3J 3M6';
