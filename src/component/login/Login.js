@@ -20,15 +20,10 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
             email: '',
             password: '',
-            repassword: '',
-            formErrors: { email: '', password: '', repassword: '' },
             emailValid: false,
             passwordVaild: false,
-            formValid: false,
             toProfile: false
         }
     }
@@ -72,46 +67,71 @@ class Login extends Component {
     }
 
     validateField(fieldName, value) {
-        let fieldValidationErrors = this.state.formErrors;
-        let emailValid = this.state.emailValid;
-        let passwordValid = this.state.passwordValid;
+
+        // var fieldValidationErrors;
+        // let emailValid = this.state.emailValid;
+        // let passwordValid = this.state.passwordValid;
 
         switch (fieldName) {
             case 'email':
-                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-                break;
+               // emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+               // fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+               // break;
+               this.state.email = value
             case 'password':
-                passwordValid = value.length >= 6;
-                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
-                break;
-            case 'repassword':
-                passwordValid = value === this.state.password;
-                fieldValidationErrors.password = passwordValid ? '' : ' does not match';
-                break;
+               // passwordValid = value.length >= 6;
+               // fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+               // break;
+               this.state.password = value
             default:
                 break;
         }
-        this.setState({
-            formErrors: fieldValidationErrors,
-            emailValid: emailValid,
-            passwordValid: passwordValid
-        }, this.validateForm);
     }
 
-    validateForm() {
-        this.setState({ formValid: this.state.emailValid && this.state.passwordValid });
-    }
+  
 
     errorClass(error) {
         return (error.length === 0 ? '' : 'has-error');
     }
 
+    async validateUser(email) {
+        try {
+            
+            const response = await fetch("http://localhost:3001/user?email=" + email, { method: 'GET' });
+            const data = await response.json();
+            return data[0].password;
+          //  this.setState({ user: data[0] });
+
+
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }
+    
+
+  }
+
+
+
     onSubmit = (e) => {
         e.preventDefault();   //prevents actual submission.
+
+
         console.log(this.state); // just checking values; remove once done.
         this.setState(() => ({ toProfile: true }));
         /* later on implement database entry */
+       console.log("this state", this.state)
+        var response = this.validateUser(this.state.email)
+
+        console.log("response ", response)
+        console.log("password", this.state.password)
+        if(response == this.state.password){
+          this.setState(() => ({ toProfile: true }));
+          sessionStorage.setItem('email', this.state.user.email);
+        }
+        else {
+        }
+
     }
 
     render() {
@@ -140,7 +160,9 @@ class Login extends Component {
             name="email"
             autoComplete="email"
             autoFocus
-          />
+            value={this.state.email}
+            onChange={this.onChange}
+            />
           <TextField
             variant="outlined"
             margin="normal"
@@ -151,6 +173,8 @@ class Login extends Component {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={this.state.password}
+            onChange={this.onChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
