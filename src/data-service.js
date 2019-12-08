@@ -119,7 +119,8 @@ module.exports.getUserByEmail = async function(email) {
 //--------------- Create
 
 module.exports.makeUser = async function(user) {
-    let newUser = await new User(user);
+    console.log('reached data-service');
+    const newUser = await new User(user);
     return await newUser.save();
 };
 

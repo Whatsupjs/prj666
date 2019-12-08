@@ -9,10 +9,15 @@ class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
+            user: {
+                userName: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phone: '',
+                email: '',
+                address: ''
+            },
             repassword: '',
             formErrors: { email: '', password: '', repassword: '' },
             emailValid: false,
@@ -28,10 +33,29 @@ class Signup extends Component {
     };
 
     handleUserInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({ [name]: value },
-            () => { this.validateField(name, value) });
+        const { name, value } = e.target;
+
+        if (e.target.name === 'repassword') {
+            this.setState({ [name]: value }, () => { this.validateField(name, value) });
+        } else if(e.target.name === 'email') {
+            this.setState(prevState => ({
+                user: {
+                    ...prevState.user,
+                    [name]: value,
+                    userName: value
+                }
+            }),
+                () => { this.validateField(name, value) });
+        } else {
+            this.setState(prevState => ({
+                user: {
+                    ...prevState.user,
+                    [name]: value
+                }
+            }),
+                () => { this.validateField(name, value) });
+        }
+
     };
 
     validateField(fieldName, value) {
@@ -49,7 +73,7 @@ class Signup extends Component {
                 fieldValidationErrors.password = passwordValid ? '' : ' is too short';
                 break;
             case 'repassword':
-                passwordValid = value === this.state.password;
+                passwordValid = value === this.state.user.password;
                 fieldValidationErrors.password = passwordValid ? '' : ' does not match';
                 break;
             default:
@@ -70,11 +94,41 @@ class Signup extends Component {
         return (error.length === 0 ? '' : 'has-error');
     }
 
+    async addUser(data) {
+        //get user id from session storage to track client's userid
+        // const id = sessionStorage.getItem("id");
+        try {
+            console.log("Posting")
+            console.log(data);
+            const request = new Request("http://localhost:3001/addUser", {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
+
+            const response = await fetch(request);
+            const status = await response.status;
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }
+    }
+
     onSubmit = (e) => {
-        e.preventDefault();   //prevents actual submission.
-        console.log(this.state); // just checking values; remove once done.
+        e.preventDefault();   //prevents page refresh.
+
+        //store this user into data for post req. 
+        const data = this.state.user;
+        this.addUser(data);
+
+        //set sessionStorage to ref. current user
+        sessionStorage.setItem('email', this.state.user.email);
+
+        //trigger for page to redirect upon submit
         this.setState(() => ({ toProfile: true }));
-        /* later on implement database entry */
     };
 
     render() {
@@ -98,28 +152,28 @@ class Signup extends Component {
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="first_name">First Name:</label>
-                                        <input className="form-control" name="firstName" type="text" value={this.state.firstName} onChange={this.onChange} required />
+                                        <input className="form-control" name="firstName" type="text" value={this.state.user.firstName} onChange={this.onChange} required />
                                     </div>
                                 </div>
 
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="last_name">Last Name:</label>
-                                        <input className="form-control" name="lastName" type="text" value={this.state.lastName} onChange={this.onChange} required />
+                                        <input className="form-control" name="lastName" type="text" value={this.state.user.lastName} onChange={this.onChange} required />
                                     </div>
                                 </div>
 
                                 <div className="col-md-6">
                                     <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                                         <label htmlFor="email">Email:</label>
-                                        <input className="form-control" name="email" type="email" value={this.state.email} onChange={this.onChange} />
+                                        <input className="form-control" name="email" type="email" value={this.state.user.email} onChange={this.onChange} />
                                     </div>
                                 </div>
 
                                 <div className="col-md-6">
                                     <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
                                         <label htmlFor="password">Password:</label>
-                                        <input className="form-control" name="password" type="password" value={this.state.password} onChange={this.onChange} />
+                                        <input className="form-control" name="password" type="password" value={this.state.user.password} onChange={this.onChange} />
                                     </div>
                                 </div>
 

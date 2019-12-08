@@ -5,23 +5,26 @@ import SidebarPrf from '../sidebar/SidebarPrf';
 
 class UserBooking extends Component {
 
+    //constructor for state property with array of services and user. 
     constructor(props) {
         super(props);
         this.state = {
             user: {},
-            service: []
+            services: []
         }
     }
-
+    
+    //GET request using client's id and store returned array of documents into services 
     async componentDidMount() {
         try {
             console.log("component has mounted");
             let id = sessionStorage.getItem("id");
-            // debugger;
+            
             const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
             const data = await response.json();
             console.log(data);
             this.setState({ user: data[0] });
+            this.setState({ services: this.state.user.userOf });
         }
         catch (error) {
             console.log("ERROR: " + error);
@@ -49,21 +52,20 @@ class UserBooking extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {/*
-                                some form of get/ fetch function to populate service state => {
-
-                                    return(
-                                        <tr>
-                                            <td key={index}>{service.name}</td>
-                                            <td key={index}>{service.type}</td>
-                                        </tr>
-                                    )
-                                }
-                            */}
+                            {this.state.services.map((service, index) => {
+                                let Address = service.location.streetNumber + " " + service.location.streetName + " " + service.location.city + ", " + service.location.postal;
+                                return (
+                                    <tr key={index}>
+                                        <td >{service.name}</td>
+                                        <td >{Address}</td>
+                                        <td >{service.type}</td>
+                                        <td> {service.provider.email}</td>
+                                        <td >{service.availability.length}</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
-
-
                 </div>
 
             </MainContainer>

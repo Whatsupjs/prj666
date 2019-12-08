@@ -101,8 +101,6 @@ app.post('/addUser', (req, res) => {
 });
 
 app.post('/updateUser', (req, res) => {
-    console.log("update recognized in server.js");
-    // console.log(req.body);
     data_service.updateUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);
@@ -143,6 +141,8 @@ app.get('/user', async function (req, res) {
             user = await data_service.getUserByUserName(req.query.username);
         } else if (req.query.id) {
             user = await data_service.getUserById(req.query.id);
+        } else if (req.query.email) {
+            user = await data_service.getUserByEmail(req.query.email);
         } else {
             user = await data_service.getAllUsers();
         }

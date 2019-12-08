@@ -4,6 +4,8 @@ import MainContainer from '../maincontainer/MainContainer';
 
 class Profile extends Component {
 
+    /* constructor for this component. 
+    sets empty object for user data to be populated and a condition to trigger form render*/
     constructor(props) {
         super(props);
         this.state = {
@@ -20,17 +22,17 @@ class Profile extends Component {
         try {
             console.log("component has mounted");
 
-            //get user id from session storage to track client's userid
-            const id = sessionStorage.getItem("id");
+            //get user id from session storage by client's email
+            const id = sessionStorage.getItem("email");
 
-            const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
+            const response = await fetch("http://localhost:3001/user?email=" + id, { method: 'GET' });
             const data = await response.json();
-            console.log('this is data: ');
-            console.log(data);
+            
             this.setState({ user: data[0] });
 
-            //wait until data gets populated ****** this is important leave it.
+            //wait until data gets populated ****** 
             this.setState({ isMounted: true });
+            sessionStorage.setItem("id", this.state.user._id);
         }
         catch (error) {
             console.log("ERROR: " + error);
@@ -79,21 +81,16 @@ class Profile extends Component {
     }
 
     onSubmit = (e) => {
-        // e.preventDefault();  //prevent page refresh //want to refresh
-
+        // package current user info 
         const data = this.state.user;
 
         this.updateUser(data);
-
     }
 
     //send updated user data into DB
     async updateUser(data) {
         //get user id from session storage to track client's userid
-        // const id = sessionStorage.getItem("id");
         try {
-            console.log("Posting")
-            console.log(data);
             const request = new Request("http://localhost:3001/updateUser", {
                 method: 'POST',
                 headers: {
@@ -112,7 +109,18 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.isMounted === false) return (<p>run the server</p>)
+        if (this.state.isMounted == false) {
+            return (
+                <MainContainer hasSidebarPrf={true} highlight="profile">
+
+                    <div className="user_profile">
+                        <br />
+                        <h2>User Profile</h2>
+                        <br />
+                    </div>
+                </MainContainer>
+            )
+        }
         else {
             return (
                 <MainContainer hasSidebarPrf={true} highlight="profile">
