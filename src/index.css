@@ -148,3 +148,7 @@ div.user_profile {
   text-align: left;
   position: relative;
 }
+
+.create {
+  float: right;  
+}

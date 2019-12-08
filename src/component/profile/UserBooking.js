@@ -5,6 +5,7 @@ import SidebarPrf from '../sidebar/SidebarPrf';
 
 class UserBooking extends Component {
 
+    //constructor for state property with array of services and user. 
     constructor(props) {
         super(props);
         this.state = {
@@ -12,12 +13,13 @@ class UserBooking extends Component {
             services: []
         }
     }
-
+    
+    //GET request using client's id and store returned array of documents into services 
     async componentDidMount() {
         try {
             console.log("component has mounted");
             let id = sessionStorage.getItem("id");
-            // debugger;
+            
             const response = await fetch("http://localhost:3001/user?id=" + id, { method: 'GET' });
             const data = await response.json();
             console.log(data);

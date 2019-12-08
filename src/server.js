@@ -91,7 +91,6 @@ app.post('/addService', (req, res) => {
 });
 
 app.post('/addUser', (req, res) => {
-    console.log("Reached server.js");
     data_service.makeUser(req.body)            //needs to pass user in req.body in real use case
         .then((message) => {
             res.json(message);

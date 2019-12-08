@@ -122,12 +122,13 @@ class Signup extends Component {
 
         //store this user into data for post req. 
         const data = this.state.user;
-        console.log(data);
         this.addUser(data);
 
         //set sessionStorage to ref. current user
         sessionStorage.setItem('email', this.state.user.email);
-        // this.setState(() => ({ toProfile: true }));
+
+        //trigger for page to redirect upon submit
+        this.setState(() => ({ toProfile: true }));
     };
 
     render() {
