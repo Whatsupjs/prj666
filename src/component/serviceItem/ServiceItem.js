@@ -42,7 +42,7 @@ class ServiceItem extends Component {
                         </div>
                     </div>
                     <div className="card-footer">
-                        <a href="/" className="btn btn-primary">Details</a>
+                        <a href={`/detail/${this.state.service.id}`} className="btn btn-primary">Details</a>
                     </div>
                 </div>
         );
