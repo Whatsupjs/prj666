@@ -37,7 +37,7 @@ class Signup extends Component {
 
         if (e.target.name === 'repassword') {
             this.setState({ [name]: value }, () => { this.validateField(name, value) });
-        } else if(e.target.name === 'email') {
+        } else if (e.target.name === 'email') {
             this.setState(prevState => ({
                 user: {
                     ...prevState.user,
@@ -111,6 +111,9 @@ class Signup extends Component {
 
             const response = await fetch(request);
             const status = await response.status;
+
+            //set sessionStorage to ref. current user
+            sessionStorage.setItem('email', this.state.user.email);
         }
         catch (error) {
             console.log("ERROR: " + error);
@@ -124,11 +127,10 @@ class Signup extends Component {
         const data = this.state.user;
         this.addUser(data);
 
-        //set sessionStorage to ref. current user
-        sessionStorage.setItem('email', this.state.user.email);
-
         //trigger for page to redirect upon submit
-        this.setState(() => ({ toProfile: true }));
+        setTimeout(function() { //Start the timer
+            this.setState({toProfile: true}) //After 1 second, set render to true
+        }.bind(this), 1000);
     };
 
     render() {
