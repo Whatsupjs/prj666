@@ -29,13 +29,16 @@ class Profile extends Component {
             const data = await response.json();
             
             this.setState({ user: data[0] });
-
-            //wait until data gets populated ****** 
-            this.setState({ isMounted: true });
-            sessionStorage.setItem("id", this.state.user._id);
         }
         catch (error) {
             console.log("ERROR: " + error);
+        }finally{
+            setTimeout(function() { //Start the timer
+                this.setState({isMounted: true}) //After 1 second, set render to true
+            }.bind(this), 1000);
+
+            this.setState({isMounted: true});
+            sessionStorage.setItem("id", this.state.user._id);
         }
     }
 
@@ -109,7 +112,7 @@ class Profile extends Component {
     }
 
     render() {
-        if (this.state.isMounted == false) {
+        if (this.state.isMounted === false) {
             return (
                 <MainContainer hasSidebarPrf={true} highlight="profile">
 
