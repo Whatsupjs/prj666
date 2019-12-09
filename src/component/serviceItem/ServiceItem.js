@@ -5,24 +5,26 @@ const path = require('path');
 class ServiceItem extends Component {
     constructor(props){
         super(props);
-        let image_ = path.normalize(this.props.service.image);
+
+        let star_;
+        if (props.service.rate > 4) { star_="★★★★★"; }
+        else if (props.service.rate > 3) { star_ = "★★★★☆"; }
+        else if (props.service.rate > 2) { star_ = "★★★☆☆"; }
+        else if (props.service.rate > 1) { star_ = "★★☆☆☆"; }
+        else if (props.service.rate > 0) { star_ = "★☆☆☆☆"; }
+        else { star_ = "☆☆☆☆☆"; }
+
         this.state = {
             service: this.props.service,
-            image: image_
+            image: path.normalize(this.props.service.image),
+            stars: star_
         };
     }
 
     render() {
-        if (this.state.service.rate == 1) { this.state.service.provider.stars = "★☆☆☆☆"; }
-        else if (this.state.service.rate == 2) { this.state.service.provider.stars = "★★☆☆☆"; }
-        else if (this.state.service.rate == 3) { this.state.service.provider.stars = "★★★☆☆"; }
-        else if (this.state.service.rate == 4) { this.state.service.provider.stars = "★★★★☆"; }
-        else if (this.state.service.rate == 5) { this.state.service.provider.stars = "★★★★★"; }
-        else { this.state.service.provider.stars = "☆☆☆☆☆"; }
-
         const image = require('../../images/' + `${this.state.image}`);
         return (
-                <div className="card" style={{border: '4px solid lightsteelblue', margin: '6px', backgroundColor: 'azure'}}>
+                <div className="card" style={{border: '4px solid gold', margin: '6px', backgroundColor: '#eeeeee'}}>
                     <div className="card-header">
                         <strong>{this.state.service.provider.firstName} {this.state.service.provider.lastName}</strong>
                     </div>
@@ -37,12 +39,12 @@ class ServiceItem extends Component {
                             <br/>
                             Email: {this.state.service.provider.email}
                             <br/>
-                            Rate: {this.state.service.provider.stars}
+                            Rate: <span style={{ color: 'orange' }}>{this.state.stars}</span>
                             <br/>
                         </div>
                     </div>
                     <div className="card-footer">
-                        <a href={`/detail/${this.state.service.id}`} className="btn btn-primary">Details</a>
+                        <a href={`/detail?pack=${JSON.stringify(this.state)}`} className="btn btn-primary">Details</a>
                     </div>
                 </div>
         );

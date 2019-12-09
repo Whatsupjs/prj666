@@ -73,6 +73,7 @@ const service = {
 };
 
 //--------------- End of the creating fake objects  ---------------//
+
 // testing API server
 app.get('/', function (req, res) {
     res.set('Content-Type', 'text/plain');
