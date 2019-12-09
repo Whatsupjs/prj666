@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
 import { FormErrors } from './FormErrors';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 class Signup extends Component {

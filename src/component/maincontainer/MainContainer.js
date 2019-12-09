@@ -12,13 +12,19 @@ class MainContainer extends Component {
             hasSidebarPrf: props.hasSidebarPrf,
             isLoggedIn: false
         }
+
+        this.logout=this.logout.bind(this);
     }
 
     componentDidMount(){
-        
+        //check if user is logged in, if email variable is present hide / show elements.
         if (sessionStorage.getItem("email") != null) {
             this.setState({ isLoggedIn: true });
         }
+    }
+
+    logout() {
+        sessionStorage.removeItem("email");
     }
 
     render() {
@@ -37,9 +43,11 @@ class MainContainer extends Component {
                         </div>
 
                         <div className="offset-sm-5 col-sm-2" id="sign_in_up">
-                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/login"><b>Login&nbsp;/&nbsp;</b></a>
-                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/signup"><b>Sign Up</b></a>
-                            <a hidden={this.state.isLoggedIn == true ? false: true} href="/user/profile"><b>User Settings</b></a>
+                            <a hidden={this.state.isLoggedIn === false ? false: true} href="/login"><b>Login&nbsp;/&nbsp;</b></a>
+                            <a hidden={this.state.isLoggedIn === false ? false: true} href="/signup"><b>Sign Up</b></a>
+                            <a hidden={this.state.isLoggedIn === true ? false: true} href="/user/profile"><b>User Settings</b></a>
+                            <br/>
+                            <a hidden={this.state.isLoggedIn === true ? false: true} onClick={() => {this.logout()}} href='/'><b>Logout</b></a>
                         </div>
                     </div>
 
