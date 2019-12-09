@@ -86,6 +86,10 @@ class App extends Component {
                         <HouseKeeping/>
                     )}/>
 
+                    <Route exact path='/housekeeping/:filter/:fval' render={(props) => (
+                        <HouseKeeping {...props}/>
+                    )}/>
+
                     <Route render={() => (
                         <NotFound/>
                     )}/>

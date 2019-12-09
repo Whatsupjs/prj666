@@ -152,3 +152,17 @@ div.user_profile {
 .create {
   float: right;  
 }
+
+.filterName, filter{
+  text-align: left;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.filter {
+  margin-left: 0%;
+}
+
+.filter > li > a {
+  padding-left: 0;
+}
