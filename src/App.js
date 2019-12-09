@@ -4,39 +4,13 @@ import NotFound from "./component/notfound/NotFound";
 import Signup from "./component/signup/Signup";
 import Home from "./component/home/Home";
 import ServiceDetail from "./component/servicedetail/ServiceDetail";
-import HouseKeeping from "./component/housekeeping/HouseKeeping";
+import Category from "./component/category/Category";
 import Profile from "./component/profile/Profile";
 import UserService from './component/profile/UserService';
 import UserBooking from './component/profile/UserBooking';
 import Login from './component/login/Login';
 import Booking from './component/booking/Booking';
 
-
-////  ONLY TO TEST THE SERVICE DETAIL PAGE  ////
-////  PLEASE LEAVE IT UNTIL RATING AND MAP GETS IMPLEMENTED   ////
-const serviceProvider = {
-    name: "Keith Chen",
-    phone: "647-123-1234",
-    email: "karla123@gmail.com",
-    introduction: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    detail: "",
-    location: "TO BE ADDED AS A COORDINATION DEPENDING ON PLUG-IN",
-    rate: 3.5,
-    image: "./welding.jpg",    // the test image is located in the same folder as the component. for test we don,t need path
-    comments: [
-        "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores",
-        "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores"
-    ]
-}
-
-// sessionStorage.setItem("email", "cheersallgoods@gmail.com");
-//................................................////
 
 
 class App extends Component {
@@ -57,12 +31,12 @@ class App extends Component {
 
                     <Route exact path='/login' render={() => (
                         <Login />
-                    )}/>    
+                    )}/>
 
                     <Route exact path='/user/profile' render={() => (
                         <Profile/>
                     )}/>
-                    
+
                     <Route exact path='/user/service' render={() => (
                         <UserService />
                     )}/>
@@ -75,23 +49,29 @@ class App extends Component {
                         <Booking />
                     )}/>
 
-                    {/*temporary*/
-                    /*until we implement a link to access to servicedetail, I use plumbing link to access it */}
-                    <Route exact path='/plumbing' render={() => (
-                        <ServiceDetail serviceProvider={ serviceProvider }/>
+                    <Route exact path='/housekeeping' render={() => (
+                        <Category title={ "House Keeping" }/>
                     )}/>
 
-                    <Route exact path='/housekeeping' render={() => (
-                        <HouseKeeping/>
+                    <Route exact path='/plumbing' render={() => (
+                        <Category title={ "Plumbing" }/>
+                    )}/>
+
+                    <Route exact path='/cooking' render={() => (
+                        <Category title={ "Cooking" }/>
                     )}/>
 
                     <Route exact path='/housekeeping/:filter/:fval' render={(props) => (
-                        <HouseKeeping {...props}/>
+                        <Category title={ "House Keeping" } {...props}/>
                     )}/>
 
-                    <Route render={() => (
-                        <NotFound/>
+                    <Route exact path='/all' render={() => (
+                        <Category title={ "All" }/>
                     )}/>
+
+                    <Route path='/detail' component={ServiceDetail}/>
+
+                    <Route render={() => (<NotFound/>)}/>
 
                 </Switch>
 

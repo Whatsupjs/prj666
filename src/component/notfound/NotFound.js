@@ -5,18 +5,17 @@ class NotFound extends Component {
 
     render() {
         return (
-            <div>
-                <MainContainer>
-                    <div className="row" style={{height: '100vh'}}>
-                        <div className="col-md-12">
-                            <h1 className="page-header">Not Found</h1>
-                            <strong><span>404</span></strong>
-                            <br/>
-                            <span>Page Not Found</span>
-                        </div>
+            <MainContainer>
+                <div className="row" style={{height: '100vh', width: 'auto'}}>
+                    <div className="col-md-12">
+                        <br/><br/><br/>
+                        <h1 className="page-header">Not Found</h1>
+                        <strong><span>404</span></strong>
+                        <br/>
+                        <span>Page Not Found</span>
                     </div>
-                </MainContainer>
-            </div>
+                </div>
+            </MainContainer>
         );
     }
 }

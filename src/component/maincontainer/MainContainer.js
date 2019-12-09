@@ -15,7 +15,7 @@ class MainContainer extends Component {
     }
 
     componentDidMount(){
-        
+
         if (sessionStorage.getItem("email") != null) {
             this.setState({ isLoggedIn: true });
         }
@@ -37,9 +37,9 @@ class MainContainer extends Component {
                         </div>
 
                         <div className="offset-sm-5 col-sm-2" id="sign_in_up">
-                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/login"><b>Login&nbsp;/&nbsp;</b></a>
-                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/signup"><b>Sign Up</b></a>
-                            <a hidden={this.state.isLoggedIn == true ? false: true} href="/user/profile"><b>User Settings</b></a>
+                            <a hidden={this.state.isLoggedIn === false ? false: true} href="/login"><b>Login&nbsp;/&nbsp;</b></a>
+                            <a hidden={this.state.isLoggedIn === false ? false: true} href="/signup"><b>Sign Up</b></a>
+                            <a hidden={this.state.isLoggedIn === true ? false: true} href="/user/profile"><b>User Settings</b></a>
                         </div>
                     </div>
 
@@ -60,10 +60,10 @@ class MainContainer extends Component {
                                     <a className={(this.state.highlight === "Plumbing" ? 'nav-link active' : 'nav-link')} href="/plumbing">Plumbing</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className={(this.state.highlight === "Cooking" ? 'nav-link active' : 'nav-link')} href="/">Cooking</a>
+                                    <a className={(this.state.highlight === "Cooking" ? 'nav-link active' : 'nav-link')} href="/cooking">Cooking</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className={(this.state.highlight === "Other" ? 'nav-link active' : 'nav-link')} href="/">Other</a>
+                                    <a className={(this.state.highlight === "All" ? 'nav-link active' : 'nav-link')} href="/all">All</a>
                                 </li>
                             </ul>
                         </div>
@@ -72,10 +72,10 @@ class MainContainer extends Component {
                 </div>
 
                 <div className="row">
-                    {this.state.hasSidebar && <div className="col-md-push-3"> <Sidebar /> </div>}
-                    {this.state.hasSidebarPrf && <div className="col-md-push-3"> <SidebarPrf highlight={this.state.highlight} /> </div>}
-                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{ backgroundColor: '' }}>
-                        {this.props.children}
+                    { this.state.hasSidebar && <div className="col-md-3"> <Sidebar/> </div> }
+                    { this.state.hasSidebarPrf && <div className="col-md-3"> <SidebarPrf highlight={this.state.highlight}/> </div> }
+                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{backgroundColor: 'lavender'}}>
+                    {this.props.children}
                     </div>
                 </div>
 

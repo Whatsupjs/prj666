@@ -5,7 +5,7 @@ class SidebarPrf extends Component {
     render() {
         return (
             <div id="prf" className="sidebar">
-                <br />
+                <br/><br/>
                 <div className="Profile">
                     <ul className="nav-sidebar">
                         <li className={(this.props.highlight === "profile" ? 'active' : '')}><Link to="/user/profile">User Profile</Link> </li>
@@ -21,6 +21,7 @@ class SidebarPrf extends Component {
                         <li className={(this.props.highlight === "booking" ? 'active' : '')}><Link to="/user/booking">Bookings</Link> </li>
                     </ul>
                 </div>
+                <br/><br/>
             </div>
         );
     };
