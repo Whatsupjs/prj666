@@ -20,15 +20,54 @@ class Booking extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            phoneNum: '',
-            specialReq: '',
-            test: ''
+
+         
+                user: {},
+                isMounted: false,
+                date: '',
+                dateT: DateTime.handleDateChange
+            
+
 
 
         }
     }
+
+
+
+    async componentDidMount() {
+        //fetch from db -> json etc..
+        try {
+            console.log("component has mounted");
+
+            //get user id from session storage by client's email
+            const id = sessionStorage.getItem("email");
+
+            const response = await fetch("http://localhost:3001/user?email=" + id, { method: 'GET' });
+            const data = await response.json();
+            
+            this.setState({ user: data[0] });
+        }
+        catch (error) {
+            console.log("ERROR: " + error);
+        }finally{
+            setTimeout(function() { //Start the timer
+                this.setState({isMounted: true}) //After 1 second, set render to true
+            }.bind(this), 1000);
+
+            this.setState({isMounted: true});
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
    handleDateChange = date => {
     this.setSelectedDate(date);
@@ -41,21 +80,40 @@ class Booking extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();   //prevents actual submission.
-        console.log(this.state); // just checking values; remove once done.
-        this.setState(() => ({ toProfile: true }));
+        this.state.date = DateTime.date
+        console.log("dateeeeT", this.state.dateT)
         /* later on implement database entry */
     }
 
     handleUserInput = (e) => {
-        console.log("dfsdfdsfsdfsd", e.target.name)
-        console.log("dfsdfdsfsdfsd", e.target.value)
+    
       const name = e.target.name;
       const value = e.target.value;
-      console.log(value)
      
   }
-  onCalChange = date => this.setState({ date }) 
-  onTimeChange = time => this.setState ({ time })
+
+
+//   async updateUser(data) {
+//     //get user id from session storage to track client's userid
+//     try {
+//         const request = new Request("http://localhost:3001/updateUser", {
+//             method: 'POST',
+//             headers: {
+//                 Accept: 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(data),
+//         });
+
+//         const response = await fetch(request);
+//         const status = await response.status;
+//     }
+//     catch (error) {
+//         console.log("ERROR: " + error);
+//     }
+// }
+
+
   
 
     render() {
@@ -82,17 +140,17 @@ class Booking extends Component {
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="first_name">First Name:</label>
-                                        <input className="form-control" name="firstName" type="text" value={this.state.firstName} onChange={this.onChange} required />
+                                        <input className="form-control" name="firstName" type="text" value={this.state.user.firstName || ''}  readOnly required />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="first_name">Last Name:</label>
-                                        <input className="form-control" name="firstName" type="text" value={this.state.lastName} onChange={this.onChange} required />
+                                        <input className="form-control" name="firstName" type="text" value={this.state.user.lastName || ''}  readOnly required />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="first_name">Contact Number:</label>
-                                        <input className="form-control" name="firstName" type="text" value={this.state.phoneNum} onChange={this.onChange} required />
+                                        <input className="form-control" name="firstName" type="text" value={this.state.user.phone || ''} readOnly required />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
@@ -102,12 +160,10 @@ class Booking extends Component {
                                     </div>
                                 </div>
 
-
-
-<DateTime value={this.state.test} onChange={this.onChange}/>
+                            <DateTime value={this.state.test} onChange={this.onChange}/>
                             </fieldset>
                             <hr />
-                            <input type="submit" className="btn btn-lg btn-primary" value="Book Now" disabled={!this.state.formValid} /><br /><br /><br />
+                            <input type="submit" className="btn btn-lg btn-primary" value="Book Now" /><br /><br /><br />
                         </form>
                     </div>
                 </div>

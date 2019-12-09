@@ -24,7 +24,12 @@ class Login extends Component {
             password: '',
             emailValid: false,
             passwordVaild: false,
-            toProfile: false
+            toProfile: false,
+            retrievedPass:'',
+            incorrect: false,
+
+            user: {}
+
         }
     }
 
@@ -79,9 +84,6 @@ class Login extends Component {
                // break;
                this.state.email = value
             case 'password':
-               // passwordValid = value.length >= 6;
-               // fieldValidationErrors.password = passwordValid ? '' : ' is too short';
-               // break;
                this.state.password = value
             default:
                 break;
@@ -99,9 +101,12 @@ class Login extends Component {
             
             const response = await fetch("http://localhost:3001/user?email=" + email, { method: 'GET' });
             const data = await response.json();
-            return data[0].password;
-          //  this.setState({ user: data[0] });
+            this.state.user = data[0];
+            console.log("dataa", data[0])
+            console.log("userrrr", this.state.user)
 
+            this.state.retrievedPass = data[0].password;
+            return data[0].password;
 
         }
         catch (error) {
@@ -115,21 +120,16 @@ class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();   //prevents actual submission.
-
-
-        console.log(this.state); // just checking values; remove once done.
-        this.setState(() => ({ toProfile: true }));
-        /* later on implement database entry */
-       console.log("this state", this.state)
         var response = this.validateUser(this.state.email)
 
-        console.log("response ", response)
-        console.log("password", this.state.password)
-        if(response == this.state.password){
-          this.setState(() => ({ toProfile: true }));
+      
+
+        if(this.state.retrievedPass == this.state.password){
           sessionStorage.setItem('email', this.state.user.email);
+          this.setState(() => ({ toProfile: true }));
         }
         else {
+
         }
 
     }
