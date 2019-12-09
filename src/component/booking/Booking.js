@@ -1,26 +1,38 @@
+
+
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
 import { Redirect, withRouter } from 'react-router-dom';
-import Calendar from 'react-calendar';
-import TimePicker from 'react-time-picker';
+import 'date-fns';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
+import DateTime from './DateTime';
 
 
-class Signup extends Component {
+class Booking extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             firstName: '',
             lastName: '',
-            email: '',
-            password: '',
-            repassword: '',
-            emailValid: false,
-            passwordVaild: false,
-            formValid: false,
-            toProfile: false
+            phoneNum: '',
+            specialReq: '',
+            test: ''
+
+
         }
     }
+
+   handleDateChange = date => {
+    this.setSelectedDate(date);
+  };
 
     // update state variable whenever user inputs.
     onChange = (e) => {
@@ -35,6 +47,8 @@ class Signup extends Component {
     }
 
     handleUserInput = (e) => {
+        console.log("dfsdfdsfsdfsd", e.target.name)
+        console.log("dfsdfdsfsdfsd", e.target.value)
       const name = e.target.name;
       const value = e.target.value;
       console.log(value)
@@ -42,11 +56,14 @@ class Signup extends Component {
   }
   onCalChange = date => this.setState({ date }) 
   onTimeChange = time => this.setState ({ time })
+  
 
     render() {
         if (this.state.toProfile === true) {
             return <Redirect to='/user/profile' />
         }
+
+        
 
 
         return (
@@ -64,32 +81,33 @@ class Signup extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
-                                        <label htmlFor="first_name">Name:</label>
+                                        <label htmlFor="first_name">First Name:</label>
                                         <input className="form-control" name="firstName" type="text" value={this.state.firstName} onChange={this.onChange} required />
+                                    </div>
+                                    <div className="form-group">
+                                        <label htmlFor="first_name">Last Name:</label>
+                                        <input className="form-control" name="firstName" type="text" value={this.state.lastName} onChange={this.onChange} required />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="first_name">Contact Number:</label>
-                                        <input className="form-control" name="firstName" type="text" value={this.state.firstName} onChange={this.onChange} required />
+                                        <input className="form-control" name="firstName" type="text" value={this.state.phoneNum} onChange={this.onChange} required />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="first_name">Special Requirements:</label>
-                                        <textarea className="form-control" name="firstName" rows="10" type="text" value={this.state.firstName} onChange={this.onChange} required />
+                                        <textarea className="form-control" name="firstName" rows="10" type="text" value={this.state.specialReq} onChange={this.onChange} required />
                                     </div>
                                 </div>
-                                <TimePicker
-          onTimeChange={this.onChange}
-          value={this.state.time}
-        />
-                                <Calendar
-                    onCalChange = {this.onCalChange} 
-                    value = {this.state.date} />
+
+
+
+<DateTime value={this.state.test} onChange={this.onChange}/>
                             </fieldset>
                             <hr />
-                            <input type="submit" className="btn btn-lg btn-primary" value="Book NOw" disabled={!this.state.formValid} /><br /><br /><br />
+                            <input type="submit" className="btn btn-lg btn-primary" value="Book Now" disabled={!this.state.formValid} /><br /><br /><br />
                         </form>
                     </div>
                 </div>
@@ -99,4 +117,4 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+export default Booking;

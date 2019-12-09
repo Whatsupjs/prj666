@@ -10,7 +10,6 @@ import UserService from './component/profile/UserService';
 import UserBooking from './component/profile/UserBooking';
 import Login from './component/login/Login';
 import Booking from './component/booking/Booking';
-import { MuiThemeProvider } from '@material-ui/core';
 
 
 ////  ONLY TO TEST THE SERVICE DETAIL PAGE  ////
