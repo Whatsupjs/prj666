@@ -9,7 +9,15 @@ class MainContainer extends Component {
         this.state = {
             highlight: props.highlight,
             hasSidebar: props.hasSidebar,
-            hasSidebarPrf: props.hasSidebarPrf
+            hasSidebarPrf: props.hasSidebarPrf,
+            isLoggedIn: false
+        }
+    }
+
+    componentDidMount(){
+        
+        if (sessionStorage.getItem("email") != null) {
+            this.setState({ isLoggedIn: true });
         }
     }
 
@@ -24,13 +32,14 @@ class MainContainer extends Component {
                         <div className="offset-md-1 col-md-4" id="search_bar">
                             <form className="form-inline md-form form-md mt-0">
                                 <i className="fas fa-search" aria-hidden="true"></i>
-                                <input className="form-control form-control-md ml-3 w-75" type="search" placeholder="Search" aria-label="Search"/>
+                                <input className="form-control form-control-md ml-3 w-75" type="search" placeholder="Search" aria-label="Search" />
                             </form>
                         </div>
 
                         <div className="offset-sm-5 col-sm-2" id="sign_in_up">
-                            <a href="/login"><b>Login</b></a>&nbsp;/&nbsp;
-                            <a href="/signup"><b>Sign Up</b></a>
+                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/login"><b>Login&nbsp;/&nbsp;</b></a>
+                            <a hidden={this.state.isLoggedIn == false ? false: true} href="/signup"><b>Sign Up</b></a>
+                            <a hidden={this.state.isLoggedIn == true ? false: true} href="/user/profile"><b>User Settings</b></a>
                         </div>
                     </div>
 
@@ -63,15 +72,15 @@ class MainContainer extends Component {
                 </div>
 
                 <div className="row">
-                    { this.state.hasSidebar && <div className="col-md-push-3"> <Sidebar/> </div> }
-                    { this.state.hasSidebarPrf && <div className="col-md-push-3"> <SidebarPrf highlight={this.state.highlight}/> </div> }
-                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{backgroundColor: ''}}>
-                    {this.props.children}
+                    {this.state.hasSidebar && <div className="col-md-push-3"> <Sidebar /> </div>}
+                    {this.state.hasSidebarPrf && <div className="col-md-push-3"> <SidebarPrf highlight={this.state.highlight} /> </div>}
+                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{ backgroundColor: '' }}>
+                        {this.props.children}
                     </div>
                 </div>
 
                 <div className="row">
-                    <Footer/>
+                    <Footer />
                 </div>
             </div>
 
