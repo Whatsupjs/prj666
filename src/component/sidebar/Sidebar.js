@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Sidebar extends Component {
 
+    //construct with page state to modularize links to each service types.
     constructor(props) {
         super(props);
         this.state = {
@@ -10,12 +11,14 @@ class Sidebar extends Component {
         }
     }
 
+    //sets state's page with matching page name from sessionStorage
     componentDidMount() {
         setTimeout(function() { //Start the timer
             this.setState({page: sessionStorage.getItem("page")}) //After 1 second, set render to true
         }.bind(this), 1000);
     }
     
+    //links acts as filter button with query url
     render() {
         return(
             <div className="sidebar">
