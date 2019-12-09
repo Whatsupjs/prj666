@@ -16,6 +16,8 @@ class HouseKeeping extends Component {
             const data = await response.json();
             console.log(data);
             this.setState({ services: data });
+            
+            sessionStorage.setItem("page", "housekeeping");
         }
         catch(error) {
             console.log("ERROR: " + error);
