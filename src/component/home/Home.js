@@ -26,6 +26,7 @@ class Home extends Component {
                         <div className="panel panel-default">
                             <div className="panel-body">
                                 <br/><br/><br/>
+                                {/* Display 'Logo' image, imported from Local */}
                                 <img src={Logo} className="rounded" style={{height: '40vh'}} alt="Logo" />
                             </div>
                         </div>

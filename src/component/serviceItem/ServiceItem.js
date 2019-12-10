@@ -7,6 +7,9 @@ class ServiceItem extends Component {
         super(props);
 
         let star_;
+
+        // Set Star Rating based on Rate number set in Service Object
+        // Ensures that decimal ratings also have Star Ratings displayed
         if (props.service.rate > 4) { star_="★★★★★"; }
         else if (props.service.rate > 3) { star_ = "★★★★☆"; }
         else if (props.service.rate > 2) { star_ = "★★★☆☆"; }
@@ -14,6 +17,7 @@ class ServiceItem extends Component {
         else if (props.service.rate > 0) { star_ = "★☆☆☆☆"; }
         else { star_ = "☆☆☆☆☆"; }
 
+        // Grabs data on load to display
         this.state = {
             service: this.props.service,
             image: path.normalize(this.props.service.image),
@@ -44,6 +48,7 @@ class ServiceItem extends Component {
                         </div>
                     </div>
                     <div className="card-footer">
+                        {/* Links Details button to Details page of the selected Service Item */}
                         <a href={`/detail?pack=${JSON.stringify(this.state)}`} className="btn btn-primary">Details</a>
                     </div>
                 </div>
