@@ -20,7 +20,7 @@ class ServiceDetail extends Component {
 
         let query = querString.parse(props.location.search);
         let props_ = JSON.parse(query.pack);
-
+        console.log(props_);
         // Grabs data on load to display
         this.state = {
             service: props_.service,
@@ -52,7 +52,7 @@ class ServiceDetail extends Component {
                             <div className="col-md-6">
                                 <img className="img-thumbnail" src={image} alt="service provider"/>
                             </div>
-                            
+
                             <div className="col-md-5">
                                 <h2 className='text-left'><strong>{this.state.service.name}</strong></h2>
                                 <br/>
@@ -65,7 +65,7 @@ class ServiceDetail extends Component {
                                 <br/>
 
                                 {/* Links Book button to Booking page of the selected Service Item */}
-                                <a href={`/booking`} className="btn btn-outline-info btn-lg btn-block">Book</a>
+                                <a href={`/book?pack=${JSON.stringify(this.state)}`} className="btn btn-outline-info btn-lg btn-block">Book</a>
                                 {/*/booking:id=${this.state.service.id}*/}
                             </div>
                         </div>
