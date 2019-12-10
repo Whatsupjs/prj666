@@ -23,6 +23,7 @@ body {
 #title {
   font-size: 16em;
   color: red;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   padding: 10em auto;
 }
 
@@ -34,11 +35,13 @@ body {
 
 #sign_in_up a {
   color: yellow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   text-decoration: none;
 }
 
 #nav:last-child a {
   color: yellow;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   display: block;
   padding: 3em 2em 4px 2em;
   text-decoration: none;

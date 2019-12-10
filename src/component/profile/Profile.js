@@ -104,7 +104,6 @@ class Profile extends Component {
             });
 
             const response = await fetch(request);
-            const status = await response.status;
         }
         catch (error) {
             console.log("ERROR: " + error);
