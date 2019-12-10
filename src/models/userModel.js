@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         trim: true,
         required: "Password is Required",
         validate: [
-            function(input) { // Password length must be longer than 6 characters
+            function(input) { // Password length must be at least 6 characters long
                 return input.length >= 6;
             },
             "Password should be longer."
