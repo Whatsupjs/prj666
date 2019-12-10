@@ -47,14 +47,12 @@ class ServiceDetail extends Component {
         return (
             <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
-
                     <div className="container-fluid">
                         <div className="row">
-
                             <div className="col-md-6">
                                 <img className="img-thumbnail" src={image} alt="service provider"/>
                             </div>
-
+                            
                             <div className="col-md-5">
                                 <h2 className='text-left'><strong>{this.state.service.name}</strong></h2>
                                 <br/>

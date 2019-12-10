@@ -6,6 +6,8 @@ import SidebarPrf from '../sidebar/SidebarPrf';
 class MainContainer extends Component {
     constructor(props) {
         super(props);
+
+        // Set initial state to determine what to display
         this.state = {
             highlight: props.highlight,
             hasSidebar: props.hasSidebar,
@@ -13,7 +15,7 @@ class MainContainer extends Component {
             isLoggedIn: false
         }
 
-        this.logout=this.logout.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
@@ -30,11 +32,8 @@ class MainContainer extends Component {
 
     render() {
         return (
-
             <div className="container-fluid">
-
                 <div className="row" id="with_bg">
-
                     <div className="row" id="search_login_top">
                         <div className="offset-md-1 col-md-4" id="search_bar">
                             <form className="form-inline md-form form-md mt-0">
@@ -78,7 +77,6 @@ class MainContainer extends Component {
                             </ul>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="row">
