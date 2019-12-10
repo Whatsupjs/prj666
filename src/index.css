@@ -175,3 +175,8 @@ div.user_profile {
 .filter > li > a {
   padding-left: 0;
 }
+/*for booking class*/
+.right {
+  position: absolute;
+  left: 600px;
+}

@@ -45,9 +45,9 @@ class App extends Component {
                         <UserBooking />
                     )}/>
 
-                    <Route exact path='/booking' render={() => (
+                    {/*<Route exact path='/booking' render={() => (
                         <Booking />
-                    )}/>
+                    )}/>*/}
 
                     <Route exact path='/housekeeping' render={() => (
                         <Category title={ "House Keeping" }/>
@@ -68,6 +68,8 @@ class App extends Component {
                     <Route path='/detail' component={ServiceDetail}/>
 
                     <Route path='/filter' component={Category}/>
+
+                    <Route path='/book' component={Booking}/>
 
                     <Route render={() => (<NotFound/>)}/>
 
