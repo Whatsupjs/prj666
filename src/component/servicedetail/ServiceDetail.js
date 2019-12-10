@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import querString from 'query-string';
 import MainContainer from '../maincontainer/MainContainer';
+
 
 const boxStyle = {
     margin: '2em',
@@ -15,34 +17,32 @@ class ServiceDetail extends Component {
 
     constructor(props) {
         super(props);
+
+        let query = querString.parse(props.location.search);
+        let props_ = JSON.parse(query.pack);
+
         this.state = {
-            serviceProvider: props.serviceProvider
-        }
-    }
+            service: props_.service,
+            serviceProvider: props_.service.provider,
+            stars: props_.stars,
+            image: props_.image,
 
-    componentDidMount() {
-        /* https://github.com/auxiliary/rater  */
-        /* OR */
-        /* https://github.com/fredolss/rater-js */
-        /* a plug-in to be added later */
-        let options = {
-            max_value: 5,
-            step_size: 1,
-            initial_value: this.state.serviceProvider.rate,
-            readonly: true
+            //temporary until we add comments on database- update loop to this.state.service.comment then
+            comments: [
+                "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+                "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores",
+                "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+                "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?",
+                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores"
+            ]
         }
-
-        //$(".rating").rate(options);
     }
 
     render() {
-        if (this.state.serviceProvider.rate == 1) { this.state.stars = "★☆☆☆☆"; }
-        else if (this.state.serviceProvider.rate == 2) { this.state.stars = "★★☆☆☆"; }
-        else if (this.state.serviceProvider.rate == 3) { this.state.stars = "★★★☆☆"; }
-        else if (this.state.serviceProvider.rate == 4) { this.state.stars = "★★★★☆"; }
-        else if (this.state.serviceProvider.rate == 5) { this.state.stars = "★★★★★"; }
-        else { this.state.stars = "☆☆☆☆☆"; }
-
+        const image = require('../../images/' + `${this.state.image}`);
         return (
             <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
@@ -50,19 +50,22 @@ class ServiceDetail extends Component {
                     <div className="container-fluid">
                         <div className="row">
 
-                            <div className="col-sm-6">
-                                <img className="img-thumbnail" src={require(`${this.state.serviceProvider.image}`)} alt="service provider"/>
+                            <div className="col-md-6">
+                                <img className="img-thumbnail" src={image} alt="service provider"/>
                             </div>
 
-                            <div className="col-sm-5">
-                                <h2 className='text-left'><strong>{this.state.serviceProvider.name}</strong></h2>
+                            <div className="col-md-5">
+                                <h2 className='text-left'><strong>{this.state.service.name}</strong></h2>
                                 <br/>
-                                <h3 className='text-left'><strong>Introduction: </strong></h3>
-                                <h4 className='text-left'>{this.state.serviceProvider.introduction}</h4>
-                                <h3 className='text-left'><strong>Phone Number: </strong></h3>
-                                <h4 className='text-left'>{this.state.serviceProvider.phone}</h4>
-                                <h3 className='text-left'><strong>Email: </strong></h3>
-                                <h4 className='text-left'>{this.state.serviceProvider.email}</h4>
+                                <h3 className='text-left'><strong>Introduction:</strong></h3>
+                                <h4 className='text-left'>{this.state.service.introduction}</h4>
+                                <h3 className='text-left'><strong>Price:&nbsp;</strong>${this.state.service.price}</h3>
+                                <h3 className='text-left'><strong>Provider:&nbsp;</strong>{this.state.serviceProvider.firstName}</h3>
+                                <h3 className='text-left'><strong>Phone:&nbsp;</strong>{this.state.serviceProvider.phone}</h3>
+                                <h3 className='text-left'><strong>Email:&nbsp;</strong>{this.state.serviceProvider.email}</h3>
+                                <br/>
+                                <a href={`/booking:id=${this.state.service.id}`} className="btn btn-outline-info btn-lg btn-block">Book</a>
+
                             </div>
 
                         </div>
@@ -72,17 +75,16 @@ class ServiceDetail extends Component {
                     <div className="container-fluid">
                         <div className="row">
 
-                            <div className="col-sm-6">
-                                {/* rating now is based on a static value only to show the componet*/}
+                            <div className="col-md-6">
                                 <br/>
-                                <div className="to_be_defined"><h1><strong>{this.state.stars}</strong></h1></div>
+                                <div style={{ color: 'orange' }}><h1><strong>{this.state.stars}</strong></h1></div>
                                 <br/>
                                 <h3 className='text-left'>Comments:</h3>
                                 <br/>
                                 <table className="table table-responsive text-left" style={ tableStyle }>
                                     <tbody>
                                     {
-                                        this.state.serviceProvider.comments.map((comment,index) => {
+                                        this.state.comments.map((comment,index) => {
                                             return (
                                                 <tr key={index}>
                                                     <td>{comment}</td>
@@ -94,7 +96,9 @@ class ServiceDetail extends Component {
                                 </table>
                             </div>
 
-                            <div className="col-sm-5">
+                            <div className="col-md-5">
+                                <br/>
+                                <br/>
                                 {/* the image link will be changed to something like: src={this.state.serviceProvider.location} */
                                 /* this needs to be passed to the Location component. To be implemented later */
                                 /* https://www.npmjs.com/package/google-map-react */

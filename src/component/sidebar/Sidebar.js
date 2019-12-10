@@ -17,12 +17,14 @@ class Sidebar extends Component {
             this.setState({page: sessionStorage.getItem("page")}) //After 1 second, set render to true
         }.bind(this), 1000);
     }
-    
+
     //links acts as filter button with query url
     render() {
         return(
             <div className="sidebar">
+                <br/><br/><br/>
                 <div className="filterName serviceRating">
+
                     <h6>Service Rating</h6>
                     <ul className="filter nav-sidebar">
                         <li><Link to={'/' + this.state.page +'/rating/4'}>&#9733;&#9733;&#9733;&#9733;&#9734; &amp; Up</Link> </li>
@@ -31,7 +33,10 @@ class Sidebar extends Component {
                         <li><Link to={'/' + this.state.page +'/rating/1'}>&#9733;&#9734;&#9734;&#9734;&#9734; &amp; Up</Link> </li>
                     </ul>
                 </div>
+
+                <br/>
                 <div className="filterName priceRange">
+
                     <h6>Price Range</h6>
                     <ul className="filter nav-sidebar">
                         <li><Link to={'/' + this.state.page +'/price/1'}>Under $25</Link></li>
@@ -41,7 +46,10 @@ class Sidebar extends Component {
                         <li><Link to={'/' + this.state.page +'/price/5'}>$200 and above</Link></li>
                     </ul>
                 </div>
+
+                <br/>
                 <div className="filterName location">
+
                     <h6>Location</h6>
                     <ul className="filter nav-sidebar">
                         <li><Link to={'/' + this.state.page +'/loc/mississauga'}>Mississauga</Link></li>
@@ -51,7 +59,14 @@ class Sidebar extends Component {
                         <li><Link to={'/' + this.state.page +'/loc/oakville'}>Oakville</Link></li>
                     </ul>
                 </div>
-          </div>
+
+                <br/><br/>
+                <div>
+                    <button type="button" className="btn btn-secondary">Filter</button>
+                </div>
+                <br/><br/>
+            </div>
+
         );
     };
 }

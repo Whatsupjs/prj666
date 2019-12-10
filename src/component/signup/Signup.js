@@ -110,7 +110,6 @@ class Signup extends Component {
             });
 
             const response = await fetch(request);
-            const status = await response.status;
 
             //set sessionStorage to ref. current user
             sessionStorage.setItem('email', this.state.user.email);

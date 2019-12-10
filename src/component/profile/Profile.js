@@ -4,7 +4,7 @@ import MainContainer from '../maincontainer/MainContainer';
 
 class Profile extends Component {
 
-    /* constructor for this component. 
+    /* constructor for this component.
     sets empty object for user data to be populated and a condition to trigger form render*/
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ class Profile extends Component {
 
             const response = await fetch("http://localhost:3001/user?email=" + id, { method: 'GET' });
             const data = await response.json();
-            
+
             this.setState({ user: data[0] });
         }
         catch (error) {
@@ -44,7 +44,7 @@ class Profile extends Component {
 
     // update state variable whenever user inputs.
     onChange = (e) => {
-        //identifiers for address columns 
+        //identifiers for address columns
         let addressvar = ["streetNumber", "streetName", "city", "province", "postal"];
 
         if (addressvar.indexOf(e.target.name) >= 0) {
@@ -84,7 +84,7 @@ class Profile extends Component {
     }
 
     onSubmit = (e) => {
-        // package current user info 
+        // package current user info
         const data = this.state.user;
 
         this.updateUser(data);
@@ -104,7 +104,6 @@ class Profile extends Component {
             });
 
             const response = await fetch(request);
-            const status = await response.status;
         }
         catch (error) {
             console.log("ERROR: " + error);
