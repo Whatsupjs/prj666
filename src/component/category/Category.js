@@ -32,17 +32,18 @@ class Category extends Component {
 
     async componentDidMount() {
         try {
-
             // Grabs and fetches related data based on type of URL (Get All / Get Specific)
-
             sessionStorage.setItem("page", this.state.title);
 
             let title_ = encodeURI(this.state.title);
             let url = "";
 
+            // Checks to see if there is any filter selected by the user
+            // If there are no filters selected, proceed as normal and grab services based on the basic query
             if (Object.entries(this.state.filter).length === 0 && this.state.filter.constructor === Object) {
                 url = title_ === "All" ? "http://localhost:3001/services" : `http://localhost:3001/services?type=${title_}`;
             }
+            // If a filter is selected, grab all filter related variables and add them to the URL for a more advanced query URL
             else {
                 let range = this.state.filter.priceRange;
                 let priceMin = range.substring(0, range.indexOf('-', 0));
