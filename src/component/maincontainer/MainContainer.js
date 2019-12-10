@@ -80,9 +80,9 @@ class MainContainer extends Component {
                 </div>
 
                 <div className="row">
-                    { this.state.hasSidebar && <div className="col-md-3"> <Sidebar/> </div> }
-                    { this.state.hasSidebarPrf && <div className="col-md-3"> <SidebarPrf highlight={this.state.highlight}/> </div> }
-                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-9" : " col-md-12"} style={{backgroundColor: 'lavender'}}>
+                    { this.state.hasSidebar && <div className="col-md-2" style={{backgroundColor: 'cornsilk'}}> <Sidebar/> </div> }
+                    { this.state.hasSidebarPrf && <div className="col-md-2" style={{backgroundColor: 'cornsilk'}}> <SidebarPrf highlight={this.state.highlight}/> </div> }
+                    <div className={(this.state.hasSidebar || this.state.hasSidebarPrf) ? "col-md-10" : " col-md-12"} style={{backgroundColor: 'lavender'}}>
                     {this.props.children}
                     </div>
                 </div>

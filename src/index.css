@@ -159,10 +159,17 @@ div.user_profile {
   text-align: left;
   margin-left: 25px;
   margin-right: 25px;
+  background-color: cornsilk;
+
+}
+
+.sidebar h5 {
+  color: brown;
 }
 
 .filter {
   margin-left: 0%;
+  color: darkorange;
 }
 
 .filter > li > a {
