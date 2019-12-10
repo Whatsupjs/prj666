@@ -21,6 +21,7 @@ class ServiceDetail extends Component {
         let query = querString.parse(props.location.search);
         let props_ = JSON.parse(query.pack);
 
+        // Grabs data on load to display
         this.state = {
             service: props_.service,
             serviceProvider: props_.service.provider,
@@ -46,14 +47,12 @@ class ServiceDetail extends Component {
         return (
             <MainContainer highlight="" hasSidebar={false}>
                 <div className="well" style={ boxStyle }>
-
                     <div className="container-fluid">
                         <div className="row">
-
                             <div className="col-md-6">
                                 <img className="img-thumbnail" src={image} alt="service provider"/>
                             </div>
-
+                            
                             <div className="col-md-5">
                                 <h2 className='text-left'><strong>{this.state.service.name}</strong></h2>
                                 <br/>
@@ -64,17 +63,14 @@ class ServiceDetail extends Component {
                                 <h3 className='text-left'><strong>Phone:&nbsp;</strong>{this.state.serviceProvider.phone}</h3>
                                 <h3 className='text-left'><strong>Email:&nbsp;</strong>{this.state.serviceProvider.email}</h3>
                                 <br/>
+                                {/* Links Book button to Booking page of the selected Service Item */}
                                 <a href={`/booking:id=${this.state.service.id}`} className="btn btn-outline-info btn-lg btn-block">Book</a>
-
                             </div>
-
                         </div>
                     </div>
 
-
                     <div className="container-fluid">
                         <div className="row">
-
                             <div className="col-md-6">
                                 <br/>
                                 <div style={{ color: 'orange' }}><h1><strong>{this.state.stars}</strong></h1></div>
@@ -84,6 +80,7 @@ class ServiceDetail extends Component {
                                 <table className="table table-responsive text-left" style={ tableStyle }>
                                     <tbody>
                                     {
+                                        // Loops through the Comments array and displays each Comment using map()
                                         this.state.comments.map((comment,index) => {
                                             return (
                                                 <tr key={index}>
@@ -105,12 +102,9 @@ class ServiceDetail extends Component {
                                 /* using static image now only to demonstrate the component */}
                                 <img className="img-thumbnail" src={require('./google.png')} alt="google map"/>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
             </MainContainer>
         );
     }

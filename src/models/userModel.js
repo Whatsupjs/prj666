@@ -3,6 +3,7 @@ const AddressSchema = require('./addressModel.js');
 const Schema = mongoose.Schema;
 let ObjectId = mongoose.Types.ObjectId;
 
+// Creates the User Schema
 const UserSchema = new Schema({
     // please do not change id to _id
     id: ObjectId,
@@ -17,7 +18,7 @@ const UserSchema = new Schema({
         trim: true,
         required: "Password is Required",
         validate: [
-            function(input) {
+            function(input) { // Password length must be longer than 6 characters
                 return input.length >= 6;
             },
             "Password should be longer."
@@ -34,12 +35,14 @@ const UserSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"] // Basic validation - "xxx@xxx.xxx" Format
     },
     phone: String,
     address: AddressSchema,
-    providerOf: [{ type: ObjectId, ref: 'Service' }],
-    userOf: [{ type: ObjectId, ref: 'Service' }]
+    providerOf: [{ type: ObjectId, ref: 'Service' }], // An array containing all of the User's Service listings
+    userOf: [{ type: ObjectId, ref: 'Service' }] // An array containing all of the Services the User has booked/used
 });
 
+// Creates a Mongoose Model using the User Schema
+// Makes this Mongoose Model available to the Node application 
 module.exports = mongoose.model('User', UserSchema);

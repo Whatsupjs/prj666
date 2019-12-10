@@ -7,6 +7,9 @@ class ServiceItem extends Component {
         super(props);
 
         let star_;
+
+        // Set Star Rating based on Rate number set in Service Object
+        // Ensures that decimal ratings also have Star Ratings displayed
         if (props.service.rate > 4) { star_="★★★★★"; }
         else if (props.service.rate > 3) { star_ = "★★★★☆"; }
         else if (props.service.rate > 2) { star_ = "★★★☆☆"; }
@@ -14,6 +17,7 @@ class ServiceItem extends Component {
         else if (props.service.rate > 0) { star_ = "★☆☆☆☆"; }
         else { star_ = "☆☆☆☆☆"; }
 
+        // Grabs data on load to display
         this.state = {
             service: this.props.service,
             image: path.normalize(this.props.service.image),
@@ -24,29 +28,32 @@ class ServiceItem extends Component {
     render() {
         const image = require('../../images/' + `${this.state.image}`);
         return (
-                <div className="card" style={{border: '4px solid gold', margin: '6px', backgroundColor: '#eeeeee'}}>
-                    <div className="card-header">
-                        <strong>{this.state.service.provider.firstName} {this.state.service.provider.lastName}</strong>
+            <div className="card" style={{border: '4px solid gold', margin: '6px', backgroundColor: '#eeeeee'}}>
+                <div className="card-header">
+                    <strong>{this.state.service.provider.firstName} {this.state.service.provider.lastName}</strong>
+                </div>
+
+                <div className="card-body">
+                    <div className="">
+                        <br/>
+                        <img className="img-thumbnail" src={image} alt="HK"/>
                     </div>
-                    <div className="card-body">
-                        <div className="">
-                            <br/>
-                            <img className="img-thumbnail" src={image} alt="HK"/>
-                        </div>
-                        <div className="">
-                            <br/>
-                            Phone Number: {this.state.service.provider.phone}
-                            <br/>
-                            Email: {this.state.service.provider.email}
-                            <br/>
-                            Rate: <span style={{ color: 'orange' }}>{this.state.stars}</span>
-                            <br/>
-                        </div>
-                    </div>
-                    <div className="card-footer">
-                        <a href={`/detail?pack=${JSON.stringify(this.state)}`} className="btn btn-primary">Details</a>
+                    <div className="">
+                        <br/>
+                        Phone Number: {this.state.service.provider.phone}
+                        <br/>
+                        Email: {this.state.service.provider.email}
+                        <br/>
+                        Rate: <span style={{ color: 'orange' }}>{this.state.stars}</span>
+                        <br/>
                     </div>
                 </div>
+                
+                <div className="card-footer">
+                    {/* Links Details button to Details page of the selected Service Item */}
+                    <a href={`/detail?pack=${JSON.stringify(this.state)}`} className="btn btn-primary">Details</a>
+                </div>
+            </div>
         );
     }
 }
