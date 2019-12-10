@@ -26,8 +26,6 @@ class Booking extends Component {
                 isMounted: false,
                 date: '',
                 dateT: DateTime.handleDateChange
-            
-
 
 
         }
@@ -60,15 +58,6 @@ class Booking extends Component {
     }
 
 
-
-
-
-
-
-
-
-
-
    handleDateChange = date => {
     this.setSelectedDate(date);
   };
@@ -83,6 +72,8 @@ class Booking extends Component {
         this.state.date = DateTime.date
         console.log("dateeeeT", this.state.dateT)
         /* later on implement database entry */
+
+        this.updateUser(this.state.user)
     }
 
     handleUserInput = (e) => {
@@ -93,37 +84,30 @@ class Booking extends Component {
   }
 
 
-//   async updateUser(data) {
-//     //get user id from session storage to track client's userid
-//     try {
-//         const request = new Request("http://localhost:3001/updateUser", {
-//             method: 'POST',
-//             headers: {
-//                 Accept: 'application/json',
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data),
-//         });
+  async updateUser(data) {
+    //get user id from session storage to track client's userid
+    try {
+        const request = new Request("http://localhost:3001/updateUser", {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        });
 
-//         const response = await fetch(request);
-//         const status = await response.status;
-//     }
-//     catch (error) {
-//         console.log("ERROR: " + error);
-//     }
-// }
+        const response = await fetch(request);
+        const status = await response.status;
+    }
+    catch (error) {
+        console.log("ERROR: " + error);
+    }
+}
 
 
   
 
     render() {
-        if (this.state.toProfile === true) {
-            return <Redirect to='/user/profile' />
-        }
-
-        
-
-
         return (
             <MainContainer>
                 <div className="signup">
@@ -160,7 +144,7 @@ class Booking extends Component {
                                     </div>
                                 </div>
 
-                            <DateTime value={this.state.test} onChange={this.onChange}/>
+                            <DateTime/>
                             </fieldset>
                             <hr />
                             <input type="submit" className="btn btn-lg btn-primary" value="Book Now" /><br /><br /><br />
