@@ -12,17 +12,18 @@ body {
 }
 
 #with_bg {
-  background: url("./images/bg.jpg") no-repeat center center;
+  background: url("./images/bg2.jpg") no-repeat center center;
   background-size: cover;
   height: 40vh;
   overflow: hidden;
   width: 100vw;
-  /* child-align: bottom; */
+  padding-top: 3em;
 }
 
 #title {
-  font-size: 5vw;
-  padding: 15vh auto;
+  font-size: 16em;
+  color: red;
+  padding: 10em auto;
 }
 
 .row {
@@ -32,14 +33,14 @@ body {
 }
 
 #sign_in_up a {
-  color: black;
+  color: yellow;
   text-decoration: none;
 }
 
 #nav:last-child a {
-  color: black;
+  color: yellow;
   display: block;
-  padding: 5vw 2vw 4px 2vw;
+  padding: 3em 2em 4px 2em;
   text-decoration: none;
   font-size: 2vw;
   border-bottom: 4px solid transparent;
@@ -58,9 +59,10 @@ body {
 /* added base css for footer. Oct 23, 2019 - Jun*/
 .footer{
   /*temporary colour*/
-  background-color: rgb(243, 117, 117);
+  background-color: darkred;/*rgb(243, 117, 117);*/
+  color: white;
   padding: 10px;
-  height: 15vh;
+  height: 30vh;
   width: 100vw;
 }
 
@@ -81,15 +83,10 @@ body {
   .sidebar {
     height: 100%;
     min-height: 100vh;
-    /*position: relative;*/
-    top: 0;
-    /*bottom: 96px;*/
-    left: 0;
     z-index: 1;
-    /*display: inline-block;*/
-    padding: 20px;
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
+    display: initial;
   }
 }
 
@@ -132,7 +129,7 @@ div.signup{
 
 /* Profile page css */
 div#prf {
-  display: inline-block;
+  display: initial;
   text-align: left;
   top: 0;
 }
@@ -140,6 +137,8 @@ div#prf {
 div.user_profile {
   display: inline-block;
   width: 75%;
+  height: 100%;
+  min-height: 100vh;
   margin: 0 25px;
   text-align: left;
 }
@@ -150,5 +149,19 @@ div.user_profile {
 }
 
 .create {
-  float: right;  
+  float: right;
+}
+
+.filterName, filter{
+  text-align: left;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.filter {
+  margin-left: 0%;
+}
+
+.filter > li > a {
+  padding-left: 0;
 }
