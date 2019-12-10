@@ -153,6 +153,32 @@ app.get('/user', async function (req, res) {
         res.json(err);
     }
 });
+
+app.get('/reduce', async function(req,res) {
+    let data;
+    try {
+        if (req.query.title === 'All') { data = await data_service.getAllServices(); }
+        else { data = await data_service.getServiceByType(req.query.title); }
+        if (req.query.rate) {
+            data = data.filter(service => { return service.rate >= req.query.rate; });
+        }
+        if (req.query.priceMin) {
+            let min = parseInt(req.query.priceMin, 10);
+            data = data.filter(service => { return service.price >= min; });
+
+            let max = parseInt(req.query.priceMax, 10);
+            if (max !== 0) { data = data.filter(service => { return service.price <= max; }); }
+        }
+        if (req.query.city) {
+            data = data.filter(service => { return service.location.city === req.query.city; });
+        }
+        res.json(data);
+    }
+    catch(err) {
+        res.json(err);
+    }
+});
+
 //--------------- end of POST & GET -----------------//
 
 

@@ -61,15 +61,13 @@ class App extends Component {
                         <Category title={ "Cooking" }/>
                     )}/>
 
-                    <Route exact path='/housekeeping/:filter/:fval' render={(props) => (
-                        <Category title={ "House Keeping" } {...props}/>
-                    )}/>
-
                     <Route exact path='/all' render={() => (
                         <Category title={ "All" }/>
                     )}/>
 
                     <Route path='/detail' component={ServiceDetail}/>
+
+                    <Route path='/filter' component={Category}/>
 
                     <Route render={() => (<NotFound/>)}/>
 
