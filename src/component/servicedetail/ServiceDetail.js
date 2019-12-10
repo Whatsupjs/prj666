@@ -64,7 +64,7 @@ class ServiceDetail extends Component {
                                 <h3 className='text-left'><strong>Phone:&nbsp;</strong>{this.state.serviceProvider.phone}</h3>
                                 <h3 className='text-left'><strong>Email:&nbsp;</strong>{this.state.serviceProvider.email}</h3>
                                 <br/>
-                                <a href={`/booking:id=${this.state.service.id}`} className="btn btn-outline-info btn-lg btn-block">Book</a>
+                                <a href={`/booking`} className="btn btn-outline-info btn-lg btn-block">Book</a>
 
                             </div>
 

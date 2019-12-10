@@ -25,7 +25,7 @@ class Booking extends Component {
                 user: {},
                 isMounted: false,
                 date: '',
-                dateT: DateTime.handleDateChange
+                toUserBooking: false
 
 
         }
@@ -69,11 +69,8 @@ class Booking extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();   //prevents actual submission.
-        this.state.date = DateTime.date
-        console.log("dateeeeT", this.state.dateT)
-        /* later on implement database entry */
-
         this.updateUser(this.state.user)
+        this.setState({toUserBooking: true})
     }
 
     handleUserInput = (e) => {
@@ -108,6 +105,11 @@ class Booking extends Component {
   
 
     render() {
+
+        if (this.state.toUserBooking === true) {
+            return <Redirect to='/user/booking' />
+        }
+
         return (
             <MainContainer>
                 <div className="signup">

@@ -102,9 +102,6 @@ class Login extends Component {
             const response = await fetch("http://localhost:3001/user?email=" + email, { method: 'GET' });
             const data = await response.json();
             this.state.user = data[0];
-            console.log("dataa", data[0])
-            console.log("userrrr", this.state.user)
-
             this.state.retrievedPass = data[0].password;
             return data[0].password;
 
@@ -122,7 +119,6 @@ class Login extends Component {
         e.preventDefault();   //prevents actual submission.
         var response = this.validateUser(this.state.email)
 
-      
 
         if(this.state.retrievedPass == this.state.password){
           sessionStorage.setItem('email', this.state.user.email);

@@ -24,7 +24,7 @@ class ServiceItem extends Component {
     render() {
         const image = require('../../images/' + `${this.state.image}`);
         return (
-                <div className="card" style={{border: '4px solid gold', margin: '6px', backgroundColor: '#eeeeee'}}>
+               <div className="card" style={{border: '4px solid gold', margin: '6px', backgroundColor: '#eeeeee'}}>
                     <div className="card-header">
                         <strong>{this.state.service.provider.firstName} {this.state.service.provider.lastName}</strong>
                     </div>
