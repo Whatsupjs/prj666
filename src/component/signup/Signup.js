@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MainContainer from '../maincontainer/MainContainer';
 import { FormErrors } from './FormErrors';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 class Signup extends Component {
@@ -110,7 +110,6 @@ class Signup extends Component {
             });
 
             const response = await fetch(request);
-            const status = await response.status;
 
             //set sessionStorage to ref. current user
             sessionStorage.setItem('email', this.state.user.email);
