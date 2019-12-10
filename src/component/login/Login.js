@@ -168,7 +168,6 @@ class Login extends Component {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
             value={this.state.password}
             onChange={this.onChange}
           />
