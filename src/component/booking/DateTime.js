@@ -13,7 +13,6 @@ export default function DateTime() {
   const [selectedDate, setSelectedDate] = React.useState(new Date('2019-11-18T21:11:54'));
 
   const handleDateChange = date => {
-    this.date = date
     setSelectedDate(date);
 
   };

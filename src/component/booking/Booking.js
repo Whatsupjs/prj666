@@ -25,7 +25,8 @@ class Booking extends Component {
                 user: {},
                 isMounted: false,
                 date: '',
-                dateT: DateTime.handleDateChange
+                toUserBooking: false,
+                date:''
 
 
         }
@@ -58,22 +59,29 @@ class Booking extends Component {
     }
 
 
-   handleDateChange = date => {
-    this.setSelectedDate(date);
-  };
-
     // update state variable whenever user inputs.
     onChange = (e) => {
         this.handleUserInput(e);
     }
 
     onSubmit = (e) => {
+        
         e.preventDefault();   //prevents actual submission.
-        this.state.date = DateTime.date
-        console.log("dateeeeT", this.state.dateT)
-        /* later on implement database entry */
+    this.state.user.userOf = {
+      name: 'Test' ,
+      type:'massage',
+      provider: {
+          email: 'sedfsdfds'
+      },
+      availability: {
 
+        length: '1:30pm'
+      }
+
+    }
+        console.log("dateeee", this.state.date)
         this.updateUser(this.state.user)
+        this.setState({toUserBooking: true})
     }
 
     handleUserInput = (e) => {
@@ -108,6 +116,11 @@ class Booking extends Component {
   
 
     render() {
+
+        if (this.state.toUserBooking === true) {
+            return <Redirect to='/user/booking' />
+        }
+
         return (
             <MainContainer>
                 <div className="signup">
